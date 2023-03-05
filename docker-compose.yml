@@ -1,0 +1,36 @@
+version: "3"
+services:
+
+    nginx:
+        image: nginx:stable-alpine
+        container_name: mapteka-botelegram-nginx
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/html
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/nginx.conf
+        depends_on:
+            - php
+
+    mysql:
+        image: percona
+        restart: always
+        container_name: mapteka-botelegram-mysql
+        ports:
+            - 3307:3306
+        command: --max_allowed_packet=16M
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+
+    php:
+        container_name: mapteka-botelegram-php
+        build: docker/php
+        links:
+            - mysql
+        volumes:
+            - ./:/var/www/html
+        depends_on:
+            - mysql

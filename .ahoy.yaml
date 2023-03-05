@@ -1,0 +1,26 @@
+ahoyapi: v2dock
+commands:
+
+  up:
+    cmd: "docker-compose up --build -d"
+    usage: Create and run docker services.
+
+  down:
+    cmd: "docker-compose down $@"
+    usage: Stop the docker-compose containers.
+
+  start:
+    cmd: docker-compose start "$@"
+    usage: Start the docker-compose containers.
+
+  stop:
+    cmd: docker-compose stop "$@"
+    usage: Stop the docker-compose containers.
+
+  restart:
+    cmd: docker-compose restart "$@"
+    usage: Restart the docker-compose containers.
+
+  console:
+    cmd: 'docker exec -it mapteka-botelegram-php php artisan $@'
+    usage: Run console commands without having to cd to the project root first.
