@@ -1,0 +1,64 @@
+.major {
+    .major__body {
+        display: flex;
+        border: 1px solid $c-light-gray;
+        border-radius: 10px;
+        min-height: 80vh;
+    }
+
+    .major__icon {
+        display: flex;
+        align-items: center;
+        width: 32px;
+        height: auto;
+
+        svg {
+            fill: $c-main;
+        }
+    }
+
+    .major__menu {
+        border-right: 1px solid $c-light-gray;
+        background: $c-white;
+        width: 25%;
+        padding: 20px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+
+        @include _768 {
+            width: max-content;
+        }
+    }
+
+    .major__menu-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 10px;
+        cursor: pointer;
+        width: max-content;
+    }
+
+    .major__menu-title {
+        @include font-type-h5;
+
+        @include _768 {
+            display: none;
+        }
+    }
+
+    .major__content {
+        width: 75%;
+        padding: 20px;
+        border-radius: 10px;
+        background: $c-light-green;
+
+        h2 {
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        @include _768 {
+            width: auto;
+        }
+    }
+}

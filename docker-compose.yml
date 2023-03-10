@@ -8,7 +8,7 @@ services:
             - "80:80"
         volumes:
             - ./:/var/www/html
-            - ./docker/nginx/default.conf:/etc/nginx/conf.d/nginx.conf
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
         depends_on:
             - php
 
@@ -20,10 +20,10 @@ services:
             - 3307:3306
         command: --max_allowed_packet=16M
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: db
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
 
     php:
         container_name: mapteka-botelegram-php

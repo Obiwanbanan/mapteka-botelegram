@@ -94,30 +94,12 @@ span {
   font-weight: inherit;
 }
 
-a {
-  text-decoration: none;
-
-}
 
 a {
   cursor: pointer;
-  position: relative;
   text-decoration: none;
   outline: none;
-
-  &:visited {
-    outline: none;
-    text-decoration: none;
-  }
 }
-
-/* ##########
-Resetting styles for active elements, adding a standard transition
-########## */
-//
-//a, input, button, select, textarea {
-//  transition: color $ease-main, border-color $ease-main;
-//}
 
 button {
   cursor: pointer;

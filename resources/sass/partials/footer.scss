@@ -1,0 +1,15 @@
+.footer {
+    background: $c-main;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    .footer-copyright {
+        display: flex;
+        justify-content: center;
+        color: $c-white;
+        padding: 10px;
+        margin: 0;
+        @include font-type-h5;
+
+    }
+
+}

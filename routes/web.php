@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrganizationsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/', [OrganizationsController::class, 'dashboard'])->name('home');
+    Route::get('/organizations', [OrganizationsController::class, 'organizations'])->name('organizations');
+    Route::get('/settings', [OrganizationsController::class, 'settings'])->name('settings');
 });
+
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);

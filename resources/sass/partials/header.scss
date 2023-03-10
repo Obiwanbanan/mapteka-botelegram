@@ -1,0 +1,14 @@
+.header {
+    background: $c-main;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    a {
+        display: flex;
+        justify-content: center;
+        color: $c-white;
+        padding: 10px;
+        margin: 0;
+        @include font-type-h3;
+    }
+
+}
