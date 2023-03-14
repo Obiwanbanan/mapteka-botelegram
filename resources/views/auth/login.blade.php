@@ -42,7 +42,7 @@
 
 
                 <button type="submit" class="btn">
-                    {{ __('Login') }}
+                    {{ __('Log in') }}
                 </button>
             </form>
 

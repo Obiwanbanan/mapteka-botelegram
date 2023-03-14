@@ -1,0 +1,70 @@
+.major__content-pharmacies-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid $c-light-gray;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+
+    @include _768 {
+        flex-direction: column;
+
+        .major__content-btn {
+            max-width: 320px;
+        }
+    }
+}
+.major__content-pharmacies {
+    padding-top: 20px;
+
+    table {
+        width: 100%;
+        border: 1px solid $c-light-gray;
+        padding: 10px;
+        background-color:$c-white;
+        border-radius: 10px;
+        border-spacing: 0 10px;
+
+
+    }
+
+    thead {
+        padding-bottom: 5px;
+        tr {
+
+        }
+
+
+        td {
+            text-align: center;
+            @include font-type-h4;
+
+            :last-child {
+                border-bottom-right-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+        }
+    }
+
+    tbody {
+        tr:nth-child(odd) {
+            background: $c-light-gray2;
+        }
+
+        td {
+            text-align: center;
+            height: 40px;
+        }
+
+        td:last-child {
+            background: $c-white;
+        }
+
+    }
+
+    button {
+        padding: 5px 10px;
+    }
+
+
+}

@@ -7,7 +7,14 @@
 .btn {
     padding: 10px 20px;
     @include font-type-h5;
-    background: $c-main;
+    background-color: $c-main;
     color: $c-white;
     border-radius: 5px;
+    transition: $transition-btn;
+    border: 1px solid $c-light-gray;
+
+    &:hover {
+        background-color:$c-light-green2;
+        color: $c-black;
+    }
 }

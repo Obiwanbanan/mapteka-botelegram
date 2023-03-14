@@ -1,9 +1,9 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
 
 // Variables
 @import "variable/fonts";
 @import "variable/colors";
+@import "variable/transition";
 @import "variable/media";
 @import "variable/reset";
 @import "variable/components";
@@ -17,4 +17,6 @@
 
 //modules
 @import "modules/major";
+@import "modules/major-organization";
+@import "modules/major-pharmacies";
 @import "modules/login";

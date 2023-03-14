@@ -1,0 +1,110 @@
+.major {
+    .major__content-organization-header {
+        padding-bottom: 20px;
+        border-bottom: 1px solid $c-light-gray;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+
+        @include _768 {
+            flex-direction: column;
+
+            .major__content-btn {
+                max-width: 320px;
+            }
+        }
+    }
+
+    .major__content-organization {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+        transition: $transition-card;
+
+    }
+
+    .major__content-organization:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+
+        .major__content-organization-arrow {
+            transform: translate(5px);
+
+        }
+    }
+
+    .major__content-organization-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .major__content-organization-icon {
+        width: 60px;
+        height: 60px;
+
+        svg {
+            fill: $c-main;
+            width: 100%;
+            height: 100%;
+        }
+
+        @include _480 {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .major__content-organization-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding-top: 20px;
+
+        @include _768 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    .major__content-organization {
+        border: 1px solid $c-light-gray;
+        border-radius: 10px;
+        background: $c-white;
+        padding: 5px 10px;
+    }
+
+    .major__content-organization-name {
+        @include font-type-h3;
+        font-weight: 700;
+        padding-bottom: 10px;
+        color: $c-main;
+    }
+
+    .major__content-organization-wrapper {
+        @include font-type-h5;
+        color: $c-light-gray;
+        display: flex;
+        gap: 10px;
+
+        @include _480 {
+            flex-direction: column;
+        }
+
+    }
+
+    .major__content-organization-arrow {
+        transition: $transition-card;
+
+        svg {
+            fill: $c-main;
+        }
+
+        @include _480 {
+            display: none;
+        }
+    }
+
+
+}
