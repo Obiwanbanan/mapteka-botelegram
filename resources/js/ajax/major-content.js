@@ -107,7 +107,7 @@ function ajaxAddOrganization() {
 }
 
 function ajaxRemoveOrganization() {
-    const removeOrganizationBtn = document.querySelector('.major__content-pharmacies-header button')
+    const removeOrganizationBtn = document.querySelector('.major__content-pharmacies-header .remove')
     removeOrganizationBtn.addEventListener('click', () => {
         const csrf = document.querySelector('meta[name="_token"]').content;
         const majorContent = document.querySelector('.major__content')

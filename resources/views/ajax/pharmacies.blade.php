@@ -2,11 +2,16 @@
     <h1>
         {{ $organization->name }}
     </h1>
-    <button class="major__content-btn btn">
+    <button class="major__content-btn remove btn">
         Delete Organization
         <input id="action" type="hidden" name="action" value="remove">
         <input id="page" type="hidden" name="page" value="organizations">
+    </button>
 
+    <button class="major__content-btn edit btn">
+        Edit Organization
+        <input id="action" type="hidden" name="action" value="remove">
+        <input id="page" type="hidden" name="page" value="organizations">
     </button>
 </div>
 

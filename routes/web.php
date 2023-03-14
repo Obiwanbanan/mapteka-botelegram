@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('organization')->group(function () {
         Route::post('/add', [OrganizationsController::class, 'addOrganization'])->name('addOrganization');
         Route::post('/remove/{id}', [OrganizationsController::class, 'removeOrganization'])->name('removeOrganization');
+        Route::post('/edit/{id}', [OrganizationsController::class, 'editOrganization'])->name('editOrganization');
 
 
         Route::get('?page={$page}', [OrganizationsController::class, 'organizationPage'])->name('organizationPage');
