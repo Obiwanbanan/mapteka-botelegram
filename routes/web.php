@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OrganizationsController;
+use App\Http\Controllers\PharmaciesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,20 +22,25 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/organizations', [OrganizationsController::class, 'organizations'])->name('organizations');
     Route::post('/settings', [OrganizationsController::class, 'settings'])->name('settings');
 
-    Route::prefix('organization')->group(function () {
-        Route::post('/add', [OrganizationsController::class, 'addOrganization'])->name('addOrganization');
-        Route::post('/remove/{id}', [OrganizationsController::class, 'removeOrganization'])->name('removeOrganization');
-        Route::post('/edit/{id}', [OrganizationsController::class, 'editOrganization'])->name('editOrganization');
+    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
 
+//    Route::prefix('organization')->group(function () {
+//        Route::post('/add', [OrganizationsController::class, 'addOrganization'])->name('addOrganization');
+//        Route::post('/remove/{id}', [OrganizationsController::class, 'removeOrganization'])->name('removeOrganization');
+//        Route::post('/edit/{id}', [OrganizationsController::class, 'editOrganization'])->name('editOrganization');
+//
+//
+//        Route::get('?page={$page}', [OrganizationsController::class, 'organizationPage'])->name('organizationPage');
+//    });
 
-        Route::get('?page={$page}', [OrganizationsController::class, 'organizationPage'])->name('organizationPage');
-    });
+    Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
 
-    Route::prefix('organization/pharmacies')->group(function () {
-        Route::post('/{id}', [OrganizationsController::class, 'getPharmacies'])->name('getPharmacies');
-        Route::post('/remove/{id}', [OrganizationsController::class, 'removePharmacies'])->name('removePharmacies');
-
-    });
+//    Route::prefix('organization/pharmacies')->group(function () {
+//        Route::post('/{id}', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
+//        Route::post('/remove/{id}', [PharmaciesController::class, 'pharmacy'])->name('removePharmacy');
+//        Route::post('/edit/{id}', [PharmaciesController::class, 'pharmacy'])->name('editPharmacy');
+//
+//    });
 
 });
 

@@ -14,7 +14,7 @@
 
 }
 
-.major__content-organization-modal {
+.modal {
     display: none;
     margin: 0 auto;
     width: 100%;
@@ -34,7 +34,7 @@
     }
 }
 
-.major__content-organization-add {
+.major__content-organization-add, .major__content-pharmacy-edit-modal, .major__content-pharmacy-add-modal {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -49,16 +49,10 @@
         right: 5px;
     }
 
-    input {
-        border: 1px solid $c-light-gray;
-        border-radius: 5px;
-        padding: 10px;
-        background: $c-white;
-    }
 }
 
 
-.major__content-organization-modal-close {
+.major__content-organization-modal-close, .major__pharmacy-edit-modal-close, .major__pharmacy-add-modal-close {
     cursor: pointer;
 }
 

@@ -1,11 +1,14 @@
 <div class="footer">
-        <h5 class="footer-copyright">
-            © All rights reserved
-        </h5>
+    <h5 class="footer-copyright">
+        © All rights reserved
+    </h5>
 </div>
 
-<div class="major__content-organization-modal">
+<div class="major__content-organization-modal modal">
     <div class="major__content-organization-add">
+        <h2>
+            Add new organization
+        </h2>
         <span class="major__content-organization-modal-close">
            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32" viewBox="0 0 32 32">
             <path
@@ -13,10 +16,10 @@
             <path d="M21 8l-5 5-5-5-3 3 5 5-5 5 3 3 5-5 5 5 3-3-5-5 5-5z"/>
             </svg>
         </span>
-        <input id="action" type="hidden" name="action" value="add">
-        <input id="page" type="hidden" name="page" value="organizations">
-        <input id="organization-name" type="text" name="organization-name" placeholder="Organization Name">
-        <input id="organization-INN" type="text" name="organization-INN" placeholder="Organization INN">
+        <input class="input" id="action" type="hidden" name="action" value="add">
+        <input class="input" id="page" type="hidden" name="page" value="organizations">
+        <input class="input" id="organization-name" type="text" name="organization-name" placeholder="Organization Name">
+        <input class="input" id="organization-INN" type="text" name="organization-INN" placeholder="Organization INN">
 
         <button class="btn">
             {{ __('Register') }}

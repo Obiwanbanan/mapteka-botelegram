@@ -14,7 +14,15 @@
     border: 1px solid $c-light-gray;
 
     &:hover {
-        background-color:$c-light-green2;
+        background-color: $c-light-green2;
         color: $c-black;
     }
 }
+
+.input {
+    border: 1px solid $c-light-gray;
+    border-radius: 5px;
+    padding: 10px;
+    background: $c-white;
+}
+

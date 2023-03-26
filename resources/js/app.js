@@ -6,7 +6,6 @@
 
 import './bootstrap';
 import './ajax/major-content'
-import './ajax/add-organization'
 import { createApp } from 'vue';
 
 /**

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class PharmaciesController extends Controller
 {
-    public function removePharmacy(Request $request, PharmaciesHandler $handler) {
+    public function pharmacy(Request $request, PharmaciesHandler $handler) {
         return $handler($request);
     }
 

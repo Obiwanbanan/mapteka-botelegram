@@ -30,20 +30,7 @@ class OrganizationsController extends Controller
         return view('home');
     }
 
-    public function addOrganization(Request $request, OrganizationHandler $handler) {
+    public function organization(Request $request, OrganizationHandler $handler) {
         return $handler($request);
     }
-    public function removeOrganization(Request $request, OrganizationHandler $handler) {
-        return $handler($request);
-    }
-
-    public function getPharmacies(Request $request, PharmaciesHandler $handler) {
-        return $handler($request);
-    }
-
-    public function organizationPage(Request $request, OrganizationHandler $handler) {
-        return $handler($request);
-
-    }
-
 }

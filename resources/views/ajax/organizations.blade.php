@@ -6,6 +6,16 @@
         Add Organization
     </button>
 </div>
+<div class="major__content-organization-additional">
+    <div class="major__content-organization-search">
+        <input class="input" id='search' type="text" placeholder="Search">
+        <input class="input" id="action" type="hidden" name="action" value="search">
+        <button class="btn">
+            Search
+        </button>
+    </div>
+</div>
+
 
 <div class="major__content-organization-container">
     @foreach($organizations as $organization)
@@ -95,7 +105,7 @@
         //
         //        );
     @endphp
-{{--    {{ $organizations->links() }}--}}
+    {{--    {{ $organizations->links() }}--}}
 
 </div>
 

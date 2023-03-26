@@ -106,5 +106,20 @@
         }
     }
 
+    .major__content-organization-additional {
+        margin-top: 20px;
+    }
+
+    .major__content-organization-search {
+        display: flex;
+        gap: 5px;
+
+        input {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+
+        }
+    }
 
 }

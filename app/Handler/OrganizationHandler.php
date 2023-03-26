@@ -16,6 +16,7 @@ class OrganizationHandler
 
         $this->add($action, $request);
         $this->remove($action, $request);
+        $this->search($action, $request);
 
         $organizations = Organization::with('bot')->paginate(10);
 
@@ -26,12 +27,12 @@ class OrganizationHandler
             'html' => view('ajax/' . $page, compact('page', 'organizations'))->render()
         ]);
 
-//        } catch (\Exception $exception) {
-//
-//            return response()->json([
-//                'status' => false,
-//            ]);
-//        }
+    //        } catch (\Exception $exception) {
+    //
+    //            return response()->json([
+    //                'status' => false,
+    //            ]);
+    //        }
     }
 
     private function remove($action, $request): void
@@ -54,6 +55,12 @@ class OrganizationHandler
 
             $newOrganization->save();
 
+        }
+    }
+
+    private function search($action, $request): void {
+        if ($action === 'search') {
+          dd('qwe');
         }
     }
 }
