@@ -1,6 +1,6 @@
-<div class="major__content-pharmacies-header" data-id-organization="{{ $organization->id }}">
+<div class="major__content-pharmacies-header" data-id-organization="{{ $organization->id ?? '' }}">
     <h1>
-        {{ $organization->name }}
+        {{ $organization->name ?? ''}}
     </h1>
     <div class="major__content-pharmacies-actions">
         <button class="major__content-btn edit btn">
@@ -19,7 +19,8 @@
 </div>
 <div class="major__content-pharmacies-additional">
     <div class="major__content-pharmacies-search">
-        <input class="input" type="text" placeholder="Search">
+        <input class="input" id='search' type="text" placeholder="Search">
+        <input class="input" id="action" type="hidden" name="action" value="search">
         <button class="btn">
             Search
         </button>

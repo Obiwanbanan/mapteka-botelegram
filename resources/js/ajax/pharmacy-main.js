@@ -4,6 +4,7 @@ import {ajaxEditPharmacy} from "./pharmacy-edit";
 import {ajaxAddPharmacy} from "./pharmacy-add";
 import {pharmacyAddModal} from "./pharmacy-add-modal";
 import {ajaxRemoveOrganization} from "./organization-remove";
+import {ajaxSearchPharmacy} from "./pharmacy-search";
 
 export function ajaxPharmacies() {
     const organizations = document.querySelectorAll('.major__content-organization')
@@ -33,6 +34,7 @@ export function ajaxPharmacies() {
                     ajaxEditPharmacy()
                     ajaxAddPharmacy()
                     pharmacyAddModal()
+                    ajaxSearchPharmacy()
                 },
             });
         })

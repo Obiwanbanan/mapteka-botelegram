@@ -21,6 +21,7 @@ export function ajaxSearchOrganization() {
             data: {
                 "action": action.value,
                 "search": search.value,
+                "page": 'organizations',
             },
 
             success: function (response) {
@@ -28,6 +29,7 @@ export function ajaxSearchOrganization() {
                 organizationModal()
                 ajaxAddOrganization()
                 ajaxPharmacies()
+                ajaxSearchOrganization()
             },
 
         });

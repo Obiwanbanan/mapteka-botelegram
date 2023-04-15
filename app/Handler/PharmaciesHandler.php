@@ -16,9 +16,15 @@ class PharmaciesHandler
         $this->update($action, $request);
 
         $organizationId = $request->input('organizationId');
-        $pharmacies = Pharmacies::where('organization_id', $organizationId)->get();
-        $organization = Organization::where('id', $organizationId)->first();
 
+
+        if ($action === 'search') {
+            $pharmacies = $this->search($request, $organizationId);
+        } else {
+            $pharmacies = Pharmacies::where('organization_id', $organizationId)->get();
+        }
+
+        $organization = Organization::where('id', $organizationId)->first();
         return response()->json([
             'status' => true,
             'html' => view('ajax/pharmacies', compact('pharmacies', 'organization'))->render()
@@ -61,5 +67,18 @@ class PharmaciesHandler
 
             $newPharmacy->save();
         }
+    }
+
+    private function search($request, $organizationId)
+    {
+        $search = $request->input('search');
+        if ($search) {
+            $result = Pharmacies::where('organization_id', $organizationId)
+                ->where('name', 'LIKE', '%' . $search . '%')
+                ->get();
+        } else {
+            $result = Pharmacies::where('organization_id', $organizationId)->get();
+        }
+        return $result;
     }
 }

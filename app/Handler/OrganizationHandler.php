@@ -16,23 +16,24 @@ class OrganizationHandler
 
         $this->add($action, $request);
         $this->remove($action, $request);
-        $this->search($action, $request);
 
-        $organizations = Organization::with('bot')->paginate(10);
-
+        if ($action === 'search') {
+            $organizations = $this->search($request);
+        } else {
+            $organizations = Organization::with('bot')->get();
+        }
         $page = $request->input('page');
-
         return response()->json([
             'status' => true,
             'html' => view('ajax/' . $page, compact('page', 'organizations'))->render()
         ]);
 
-    //        } catch (\Exception $exception) {
-    //
-    //            return response()->json([
-    //                'status' => false,
-    //            ]);
-    //        }
+        //        } catch (\Exception $exception) {
+        //
+        //            return response()->json([
+        //                'status' => false,
+        //            ]);
+        //        }
     }
 
     private function remove($action, $request): void
@@ -58,9 +59,16 @@ class OrganizationHandler
         }
     }
 
-    private function search($action, $request): void {
-        if ($action === 'search') {
-          dd('qwe');
+    private function search($request)
+    {
+        $search = $request->input('search');
+        if ($search) {
+            $result = Organization::where('name', 'LIKE', '%' . $search . '%')
+                ->with('bot')
+                ->get();
+        } else {
+            $result = Organization::with('bot')->get();
         }
+        return $result;
     }
 }

@@ -11,9 +11,8 @@ majorMenuBtns.forEach((majorMenuBtn) => {
         const majorContent = document.querySelector('.major__content')
         activeMenu(majorMenuBtns, majorMenuBtn)
 
-        let url = '/' + menuBtnId
         $.ajax({
-            url: url,
+            url: '/organization',
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrf
