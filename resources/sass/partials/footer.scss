@@ -34,7 +34,7 @@
     }
 }
 
-.major__content-organization-add, .major__content-pharmacy-edit-modal, .major__content-pharmacy-add-modal {
+.major__content-organization-add, .major__content-pharmacy-edit-modal, .major__content-pharmacy-add-modal, .major__content--add-bot {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -47,6 +47,7 @@
         position: absolute;
         top: 5px;
         right: 5px;
+        cursor: pointer;
     }
 
 }
