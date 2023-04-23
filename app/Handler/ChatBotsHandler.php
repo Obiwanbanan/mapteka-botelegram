@@ -43,6 +43,23 @@ class ChatBotsHandler
         }
     }
 
+    private function update(
+        string $action,
+        object $request,
+    ): void
+    {
+        if ($action === 'update') {
+            $id = $request->input('botId');
+            Bot::where('id', $id)
+                ->update(
+                    [
+                        'name' => $request->input('name'),
+                        'token' => $request->input('token'),
+                    ]
+                );
+        }
+    }
+
     private function remove(
         string $action,
         object $request
@@ -85,20 +102,5 @@ class ChatBotsHandler
         return null;
     }
 
-    private function update(
-        string $action,
-        object $request,
-    ): void
-    {
-        if ($action === 'update') {
-            $id = $request->input('botId');
-            Bot::where('id', $id)
-                ->update(
-                    [
-                        'name' => $request->input('name'),
-                        'token' => $request->input('token'),
-                    ]
-                );
-        }
-    }
+
 }

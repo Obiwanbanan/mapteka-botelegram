@@ -1,4 +1,4 @@
-import {ajaxRemoveOrganization} from "./organization-remove";
+import {ajaxRemoveOrganization} from "../organization/organization-remove";
 import {ajaxEditPharmacy} from "./pharmacy-edit";
 import {EditPharmacyModal} from "./pharmacy-modal";
 import {ajaxAddPharmacy} from "./pharmacy-add";

@@ -1,5 +1,5 @@
 import {organizationModal} from "./organization-modal";
-import {ajaxPharmacies} from "./pharmacy-main";
+import {ajaxPharmacies} from "../pharmacy/pharmacy-main";
 
 export function ajaxAddOrganization() {
     const addOrganizationBtn = document.querySelector('.major__content-organization-add button')

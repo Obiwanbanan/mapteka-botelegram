@@ -2,10 +2,7 @@
 
 namespace App\Handler;
 
-use App\Models\Bot;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
-use Telegram\Bot\Api;
 
 class SettingsHandler
 {

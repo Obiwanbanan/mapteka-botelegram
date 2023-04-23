@@ -3,7 +3,7 @@ import {ajaxRemovePharmacy} from "./pharmacy-remove";
 import {ajaxEditPharmacy} from "./pharmacy-edit";
 import {ajaxAddPharmacy} from "./pharmacy-add";
 import {pharmacyAddModal} from "./pharmacy-add-modal";
-import {ajaxRemoveOrganization} from "./organization-remove";
+import {ajaxRemoveOrganization} from "../organization/organization-remove";
 import {ajaxSearchPharmacy} from "./pharmacy-search";
 
 export function ajaxPharmacies() {

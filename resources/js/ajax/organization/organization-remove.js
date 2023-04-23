@@ -1,5 +1,5 @@
 import {organizationModal} from "./organization-modal";
-import {ajaxPharmacies} from "./pharmacy-main";
+import {ajaxPharmacies} from "../pharmacy/pharmacy-main";
 import {ajaxAddOrganization} from "./organization-add";
 
 export function ajaxRemoveOrganization() {

@@ -5,6 +5,7 @@ namespace App\Handler;
 use App\Models\Organization;
 use App\Models\Pharmacies;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 
 class OrganizationHandler
 {
@@ -35,17 +36,10 @@ class OrganizationHandler
         //            ]);
         //        }
     }
-
-    private function remove($action, $request): void
-    {
-        if ($action === 'remove') {
-            $organizationId = $request->input('id');
-            Pharmacies::where('organization_id', $organizationId)->delete();
-            Organization::where('id', $organizationId)->delete();
-        }
-    }
-
-    private function add($action, $request): void
+    private function add(
+        string $action,
+        object $request
+    ): void
     {
         if ($action === 'add') {
             $newOrganization = new Organization();
@@ -59,7 +53,21 @@ class OrganizationHandler
         }
     }
 
-    private function search($request)
+    private function remove(
+        string $action,
+        object $request
+    ): void
+    {
+        if ($action === 'remove') {
+            $organizationId = $request->input('id');
+            Pharmacies::where('organization_id', $organizationId)->delete();
+            Organization::where('id', $organizationId)->delete();
+        }
+    }
+
+    private function search(
+        object $request
+    ): Collection
     {
         $search = $request->input('search');
         if ($search) {

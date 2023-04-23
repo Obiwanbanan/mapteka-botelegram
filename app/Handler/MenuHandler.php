@@ -5,8 +5,6 @@ namespace App\Handler;
 use App\Models\Bot;
 use App\Models\Organization;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
-use Telegram\Bot\Api;
 
 class MenuHandler
 {
@@ -16,24 +14,13 @@ class MenuHandler
     {
         $page = $request->input('page');
 
-        if ($page === 'dashboard') {
-            $content = $this->dashboard($page);
-        }
-
-        if ($page === 'organizations') {
-            $content = $this->organizations($page);
-        }
-
-        if ($page === 'settings') {
-            $content = $this->settings($page);
-        }
-
-        if ($page === 'chatbots') {
-            $content = $this->chatBots($page);
-        }
-
-
-        return $content;
+        return match ($page) {
+            "dashboard" => $this->dashboard($page),
+            "organizations" => $this->organizations($page),
+            "settings" => $this->settings($page),
+            "chatbots" => $this->chatBots($page),
+            default => $this->dashboard($page),
+        };
     }
 
 
