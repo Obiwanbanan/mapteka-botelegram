@@ -1,6 +1,5 @@
 export function addBotModal() {
-    const openBtn = document.querySelector('.settings__add-bot button')
-
+    const openBtn = document.querySelector('.chatbots__add button')
     const closeBtn = document.querySelector('.major__content-add-bot-close')
     const modal = document.querySelector('.major__content-add-bot-modal')
     const overlay = document.querySelector('.major__content-organization-overlay')

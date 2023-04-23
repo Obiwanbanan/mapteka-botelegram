@@ -1,0 +1,44 @@
+.chatbots__header {
+    display: flex;
+    gap: 10px;
+}
+
+.chatbots__body {
+    padding-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.chatbots__buttons {
+    display: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.chatbots__fields {
+    display: flex;
+    gap: 20px;
+}
+
+.chatbots__buttons-accept {
+    cursor: pointer;
+    svg {
+        fill: $c-green;
+    }
+}
+
+.chatbots__buttons-cancel {
+    cursor: pointer;
+    svg {
+        width: 28px;
+        fill: $c-red
+    }
+}
+
+.chatbots__buttons.active {
+    display: flex;
+}
+
+.chatbots__header {
+    padding-top: 20px;
+}

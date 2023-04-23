@@ -9,7 +9,7 @@ class Bot extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'username', 'token'];
+    protected $fillable = ['name', 'username', 'token', 'created_at', 'updated_at'];
 
     public function Organization()
     {

@@ -2,8 +2,9 @@ import {ajaxAddOrganization} from "./organization-add";
 import {organizationModal} from "./organization-modal";
 import {ajaxPharmacies} from "./pharmacy-main";
 import {ajaxSearchOrganization} from "./organization-search";
-import {addBot} from "./settings-add-bot";
-import {addBotModal} from "./settings-add-bot-modal";
+import {addBot} from "./chatbots-add";
+import {chatbotsMain} from "./chatbots-main";
+import {addBotModal} from "./chatbots-add-modal";
 
 const majorMenuBtns = document.querySelectorAll('.major__menu-btn')
 majorMenuBtns.forEach((majorMenuBtn) => {
@@ -14,7 +15,7 @@ majorMenuBtns.forEach((majorMenuBtn) => {
         activeMenu(majorMenuBtns, majorMenuBtn)
 
         $.ajax({
-            url: '/organization',
+            url: '/menu',
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrf
@@ -33,9 +34,8 @@ majorMenuBtns.forEach((majorMenuBtn) => {
                     ajaxPharmacies()
                     ajaxSearchOrganization()
                 }
-                if (menuBtnId === 'settings') {
-                    addBot()
-                    addBotModal()
+                if (menuBtnId === 'chatbots') {
+                    chatbotsMain()
                 }
 
             },

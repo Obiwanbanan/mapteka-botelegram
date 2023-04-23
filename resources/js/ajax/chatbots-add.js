@@ -1,4 +1,6 @@
-import {addBotModal} from "./settings-add-bot-modal";
+import {addBotModal} from "./chatbots-add-modal";
+import {choiceBot} from "./chatbots-choice";
+import {editBot} from "./chatbots-edit";
 
 export function addBot() {
     const btn = document.querySelector('.major__content-add-bot-modal button')
@@ -12,14 +14,14 @@ export function addBot() {
             const username = form.querySelector('#username')
             const token = form.querySelector('#token')
             $.ajax({
-                url: 'settings',
+                url: 'chatBots',
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrf
                 },
 
                 data: {
-                    "page": 'settings',
+                    "page": 'chatbots',
                     "action": action.value,
                     "name": name.value,
                     "username": username.value,
@@ -30,6 +32,8 @@ export function addBot() {
                     majorContent.innerHTML = response.html
                     addBot()
                     addBotModal()
+                    choiceBot()
+                    editBot()
                 },
             });
         })
