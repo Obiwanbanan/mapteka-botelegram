@@ -1,4 +1,4 @@
-import {organizationModal} from "./organization-modal";
+import {organizationAddModal} from "./organization-add-modal";
 import {ajaxPharmacies} from "../pharmacy/pharmacy-main";
 import {ajaxAddOrganization} from "./organization-add";
 
@@ -26,7 +26,7 @@ export function ajaxSearchOrganization() {
 
             success: function (response) {
                 majorContent.innerHTML = response.html
-                organizationModal()
+                organizationAddModal()
                 ajaxAddOrganization()
                 ajaxPharmacies()
                 ajaxSearchOrganization()

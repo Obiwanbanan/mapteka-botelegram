@@ -17,6 +17,7 @@ class OrganizationHandler
         $action = $request->input('action') ?? '';
 
         $this->add($action, $request);
+        $this->update($action, $request);
         $this->remove($action, $request);
 
         if ($action === 'search') {
@@ -53,6 +54,24 @@ class OrganizationHandler
 
             $newOrganization->save();
 
+        }
+    }
+
+    private function update(
+        string $action,
+        object $request
+    ): void
+    {
+        if ($action === 'update') {
+            $id = $request->input('organizationId');
+            Organization::where('id', $id)
+                ->update(
+                    [
+                        'name' => $request->input('name'),
+                        'INN' => $request->input('INN'),
+                        'bot_id' => $request->input('botId')
+                    ]
+                );
         }
     }
 

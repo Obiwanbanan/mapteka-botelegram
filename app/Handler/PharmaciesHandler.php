@@ -2,6 +2,7 @@
 
 namespace App\Handler;
 
+use App\Models\Bot;
 use App\Models\Organization;
 use App\Models\Pharmacies;
 use Illuminate\Http\JsonResponse;
@@ -26,11 +27,11 @@ class PharmaciesHandler
         }
 
         $organization = Organization::where('id', $organizationId)->first();
-
+        $chatBots = Bot::all();
 
         return response()->json([
             'status' => true,
-            'html' => view('ajax/pharmacies', compact('pharmacies', 'organization'))->render()
+            'html' => view('ajax/pharmacies', compact('pharmacies', 'organization', 'chatBots'))->render()
         ]);
     }
 

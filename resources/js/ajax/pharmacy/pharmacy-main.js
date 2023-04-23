@@ -1,10 +1,12 @@
-import {EditPharmacyModal} from "./pharmacy-modal";
+import {EditPharmacyModal} from "./pharmacy-edit-modal";
 import {ajaxRemovePharmacy} from "./pharmacy-remove";
 import {ajaxEditPharmacy} from "./pharmacy-edit";
 import {ajaxAddPharmacy} from "./pharmacy-add";
 import {pharmacyAddModal} from "./pharmacy-add-modal";
 import {ajaxRemoveOrganization} from "../organization/organization-remove";
 import {ajaxSearchPharmacy} from "./pharmacy-search";
+import {organizationEditModal} from "../organization/organization-edit-modal";
+import {organizationEdit} from "../organization/organization-edit";
 
 export function ajaxPharmacies() {
     const organizations = document.querySelectorAll('.major__content-organization')
@@ -35,6 +37,8 @@ export function ajaxPharmacies() {
                     ajaxAddPharmacy()
                     pharmacyAddModal()
                     ajaxSearchPharmacy()
+                    organizationEdit()
+                    organizationEditModal()
                 },
             });
         })

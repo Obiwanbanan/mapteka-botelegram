@@ -1,5 +1,5 @@
 import {ajaxAddOrganization} from "./organization/organization-add";
-import {organizationModal} from "./organization/organization-modal";
+import {organizationAddModal} from "./organization/organization-add-modal";
 import {ajaxPharmacies} from "./pharmacy/pharmacy-main";
 import {ajaxSearchOrganization} from "./organization/organization-search";
 import {chatbotsMain} from "./chatbots/chatbots-main";
@@ -28,7 +28,7 @@ majorMenuBtns.forEach((majorMenuBtn) => {
                 majorContent.innerHTML = response.html
                 if (menuBtnId === 'organizations') {
                     ajaxAddOrganization()
-                    organizationModal()
+                    organizationAddModal()
                     ajaxPharmacies()
                     ajaxSearchOrganization()
                 }

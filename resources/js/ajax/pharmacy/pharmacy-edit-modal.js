@@ -36,6 +36,3 @@ function closeModalOrganization(Btn, modal, overlay) {
         })
     }
 }
-
-export class pharmacyAddModal {
-}

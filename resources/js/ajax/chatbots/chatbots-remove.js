@@ -10,7 +10,7 @@ export function removeBot() {
             const csrf = document.querySelector('meta[name="_token"]').content;
             const majorContent = document.querySelector('.major__content')
             const selectBots = document.querySelector('.chatbots__choice select')
-            const botId = selectBots.options[selectBots.selectedIndex].value
+            const botId = selectBots.options[selectBots.selectedIndex].id
 
             $.ajax({
                 url: 'chatBots',

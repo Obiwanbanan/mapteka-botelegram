@@ -6,7 +6,7 @@ export function choiceBot() {
     if (selectBots) {
                 selectBots.addEventListener('change', (e) => {
                     const csrf = document.querySelector('meta[name="_token"]').content;
-                    const botId = selectBots.options[selectBots.selectedIndex].value
+                    const botId = selectBots.options[selectBots.selectedIndex].id
                     const body = document.querySelector('.chatbots__body')
 
                     $.ajax({

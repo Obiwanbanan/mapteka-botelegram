@@ -53,7 +53,7 @@ function updateAjax(
         const nameValue = name.value
         const tokenValue = token.value
         const selectBots = document.querySelector('.chatbots__choice select')
-        const botId = selectBots.options[selectBots.selectedIndex].value
+        const botId = selectBots.options[selectBots.selectedIndex].id
 
         $.ajax({
             url: 'chatBots',

@@ -1,4 +1,4 @@
-import {EditPharmacyModal} from "./pharmacy-modal";
+import {EditPharmacyModal} from "./pharmacy-edit-modal";
 import {ajaxRemovePharmacy} from "./pharmacy-remove";
 import {pharmacyAddModal} from "./pharmacy-add-modal";
 import {ajaxEditPharmacy} from "./pharmacy-edit";

@@ -1,6 +1,6 @@
 import {ajaxRemoveOrganization} from "../organization/organization-remove";
 import {ajaxEditPharmacy} from "./pharmacy-edit";
-import {EditPharmacyModal} from "./pharmacy-modal";
+import {EditPharmacyModal} from "./pharmacy-edit-modal";
 import {ajaxAddPharmacy} from "./pharmacy-add";
 import {pharmacyAddModal} from "./pharmacy-add-modal";
 

@@ -1,5 +1,5 @@
-import {organizationModal} from "../organization/organization-modal";
-import {EditPharmacyModal} from "./pharmacy-modal";
+import {organizationAddModal} from "../organization/organization-add-modal";
+import {EditPharmacyModal} from "./pharmacy-edit-modal";
 import {ajaxRemovePharmacy} from "./pharmacy-remove";
 import {ajaxAddPharmacy} from "./pharmacy-add";
 import {pharmacyAddModal} from "./pharmacy-add-modal";
@@ -39,7 +39,7 @@ export function ajaxEditPharmacy() {
             },
             success: function (response) {
                 majorContent.innerHTML = response.html
-                organizationModal()
+                organizationAddModal()
                 EditPharmacyModal()
                 ajaxEditPharmacy()
                 ajaxRemovePharmacy()

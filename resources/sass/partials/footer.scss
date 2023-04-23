@@ -34,7 +34,7 @@
     }
 }
 
-.major__content-organization-add, .major__content-pharmacy-edit-modal, .major__content-pharmacy-add-modal, .major__content--add-bot {
+.major__content-organization-add, .major__content-pharmacy-edit-modal, .major__content-pharmacy-add-modal, .major__content--add-bot, .major__content-organization-edit-modal {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -53,7 +53,7 @@
 }
 
 
-.major__content-organization-modal-close, .major__pharmacy-edit-modal-close, .major__pharmacy-add-modal-close {
+.major__content-organization-modal-close, .major__pharmacy-edit-modal-close, .major__pharmacy-add-modal-close, .major__organization-edit-modal-close {
     cursor: pointer;
 }
 

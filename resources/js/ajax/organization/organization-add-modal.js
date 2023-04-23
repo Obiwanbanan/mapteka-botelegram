@@ -1,4 +1,4 @@
-export function organizationModal() {
+export function organizationAddModal() {
     const openBtn = document.querySelector('.major__content-btn')
     const closeBtn = document.querySelector('.major__content-organization-modal-close')
     const modal = document.querySelector('.major__content-organization-modal')

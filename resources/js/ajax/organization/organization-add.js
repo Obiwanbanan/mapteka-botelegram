@@ -1,4 +1,4 @@
-import {organizationModal} from "./organization-modal";
+import {organizationAddModal} from "./organization-add-modal";
 import {ajaxPharmacies} from "../pharmacy/pharmacy-main";
 
 export function ajaxAddOrganization() {
@@ -12,7 +12,7 @@ export function ajaxAddOrganization() {
         const organizationName = form.querySelector('#organization-name')
         const organizationINN = form.querySelector('#organization-INN')
         const selectBots = form.querySelector('select')
-        const botId = selectBots.options[selectBots.selectedIndex].value
+        const botId = selectBots.options[selectBots.selectedIndex].id
 
         $.ajax({
             url: '/organization',
@@ -31,7 +31,7 @@ export function ajaxAddOrganization() {
 
             success: function (response) {
                 majorContent.innerHTML = response.html
-                organizationModal()
+                organizationAddModal()
                 ajaxAddOrganization()
                 ajaxPharmacies()
             },
