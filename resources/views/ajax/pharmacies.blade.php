@@ -1,7 +1,23 @@
 <div class="major__content-pharmacies-header" data-id-organization="{{ $organization->id ?? '' }}">
-    <h1>
-        {{ $organization->name ?? ''}}
-    </h1>
+
+    <div class="major__content-pharmacies-wrapper">
+        <h1>
+            {{ $organization->name ?? ''}}
+        </h1>
+        <div class="major__content-pharmacies-info">
+            @if(!empty($organization->INN))
+                <div class="major__content-pharmacies-inn">
+                    {{ $organization->INN }}
+                </div>
+            @endif
+            @if(!empty($organization->bot->username))
+                <div class="major__content-pharmacies-botname">
+                    {{ $organization->bot->username }}
+                </div>
+            @endif
+        </div>
+
+    </div>
     <div class="major__content-pharmacies-actions">
         <button class="major__content-btn edit btn">
             Edit Organization

@@ -2,6 +2,7 @@
 
 namespace App\Handler;
 
+use App\Models\Bot;
 use App\Models\Organization;
 use App\Models\Pharmacies;
 use Illuminate\Http\JsonResponse;
@@ -23,10 +24,12 @@ class OrganizationHandler
         } else {
             $organizations = Organization::with('bot')->get();
         }
+
+        $chatBots = Bot::all();
         $page = $request->input('page');
         return response()->json([
             'status' => true,
-            'html' => view('ajax/' . $page, compact('page', 'organizations'))->render()
+            'html' => view('ajax/' . $page, compact('page', 'organizations', 'chatBots'))->render()
         ]);
 
         //        } catch (\Exception $exception) {
@@ -46,7 +49,7 @@ class OrganizationHandler
 
             $newOrganization->name = $request->input('organizationName');
             $newOrganization->INN = $request->input('organizationINN');
-            $newOrganization->bot_id = 4;
+            $newOrganization->bot_id = $request->input('botId');
 
             $newOrganization->save();
 

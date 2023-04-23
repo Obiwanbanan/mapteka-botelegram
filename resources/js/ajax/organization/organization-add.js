@@ -11,6 +11,8 @@ export function ajaxAddOrganization() {
         const page = form.querySelector('#page');
         const organizationName = form.querySelector('#organization-name')
         const organizationINN = form.querySelector('#organization-INN')
+        const selectBots = form.querySelector('select')
+        const botId = selectBots.options[selectBots.selectedIndex].value
 
         $.ajax({
             url: '/organization',
@@ -24,6 +26,7 @@ export function ajaxAddOrganization() {
                 "page": page.value,
                 "organizationName": organizationName.value,
                 "organizationINN": organizationINN.value,
+                "botId": botId,
             },
 
             success: function (response) {

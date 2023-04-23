@@ -40,9 +40,11 @@ class MenuHandler
     ): JsonResponse
     {
         $organizations = Organization::with('bot')->get();
+        $chatBots = Bot::all();
+
         return response()->json([
             'status' => true,
-            'html' => view('ajax/' . $page, compact('page', 'organizations'))->render()
+            'html' => view('ajax/' . $page, compact('page', 'organizations', 'chatBots'))->render()
         ]);
     }
 

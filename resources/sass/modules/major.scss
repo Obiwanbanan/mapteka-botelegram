@@ -4,6 +4,7 @@
         border: 1px solid $c-light-gray;
         border-radius: 10px;
         min-height: 80vh;
+        max-height: 80vh;
     }
 
     .major__icon {
@@ -69,6 +70,7 @@
         padding: 20px;
         border-radius: 10px;
         background: $c-light-green;
+        overflow: auto;
 
         h1 {
             @include font-type-h2;

@@ -17,6 +17,7 @@
 
     .major__content-pharmacies-actions {
         display: flex;
+        flex-direction: column;
         gap: 5px;
     }
 
@@ -93,7 +94,10 @@
     button {
         padding: 5px 10px;
     }
+}
 
-
-
+.major__content-pharmacies-info {
+    display: flex;
+    gap: 15px;
+    color: $c-light-gray;
 }

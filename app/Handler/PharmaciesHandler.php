@@ -11,7 +11,7 @@ class PharmaciesHandler
 {
     public function __invoke($request): JsonResponse
     {
-        $action = $request->input('action');
+        $action = $request->input('action') ?? '';
 
         $this->add($action, $request);
         $this->remove($action, $request);
