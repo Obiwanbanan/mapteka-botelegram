@@ -36,29 +36,6 @@ majorMenuBtns.forEach((majorMenuBtn) => {
                     chatbotsMain()
                 }
 
-                if (menuBtnId === 'settings') {
-
-                    document.querySelector('.send-message-test').addEventListener('click', () => {
-                        const csrf = document.querySelector('meta[name="_token"]').content;
-                        console.log('qwe')
-                        $.ajax({
-                            url: '/sendmessage',
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': csrf
-                            },
-
-                            data: {
-                                "csrf_token": csrf,
-                            },
-
-                            success: function (response) {
-
-                            },
-                        });
-                    })
-
-                }
 
             },
         });

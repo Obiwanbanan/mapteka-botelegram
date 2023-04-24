@@ -12,12 +12,14 @@
 .chatbots__buttons {
     display: none;
     gap: 20px;
-    align-items: center;
+    height: max-content;
+
 }
 
 .chatbots__fields {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .chatbots__buttons-accept {
@@ -27,8 +29,13 @@
     }
 }
 
+.chatbots__status {
+    padding-top: 10px;
+}
+
 .chatbots__buttons-cancel {
     cursor: pointer;
+
     svg {
         width: 28px;
         fill: $c-red
@@ -41,4 +48,22 @@
 
 .chatbots__header {
     padding-top: 20px;
+}
+
+.chatbots__status {
+    font-weight: 700;
+    font-size: 20px;
+    .active {
+        color: $c-green;
+        text-transform: capitalize;
+    }
+
+    .deactivate {
+        color: $c-red;
+        text-transform: capitalize;
+    }
+}
+
+.chatbots__body-wrapper {
+    width: 70%;
 }

@@ -32,10 +32,13 @@ class ChatBotsHandler
     ): void
     {
         if ($action === 'add') {
+
+            $status = $this->setWebhook($request);
             $newBot = new Bot();
 
             $newBot->name = $request->input('name');
             $newBot->token = $request->input('token');
+            $newBot->webhook = $status;
 
             $newBot->save();
         }
@@ -48,11 +51,15 @@ class ChatBotsHandler
     {
         if ($action === 'update') {
             $id = $request->input('botId');
+            $status = $this->setWebhook($request);
+
             Bot::where('id', $id)
                 ->update(
                     [
                         'name' => $request->input('name'),
                         'token' => $request->input('token'),
+                        'webhook' => $status,
+                        'url' => $request->input('url'),
                     ]
                 );
         }
@@ -88,5 +95,18 @@ class ChatBotsHandler
         return null;
     }
 
+    private function setWebhook(
+        object $request
+    ): bool
+    {
+        try {
+            $url = $request->input('url');
+            $botToken = $request->input('token');
+            $telegram = new Api($botToken);
+            return $telegram->setWebhook(['url' => $url . '/' . 'webhook']);
+        } catch (\Exception $exception) {
 
+            return false;
+        }
+    }
 }

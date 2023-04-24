@@ -19,20 +19,4 @@ class TelegramBotsController extends Controller
     {
         return $handler($request);
     }
-
-    public function setWebhook(
-        Request         $request,
-        SetWebhookHandler $handler
-    ): bool
-    {
-        return $handler($request);
-    }
-
-    public function Webhook(
-        Request         $request,
-        SetWebhookHandler $handler
-    ): bool
-    {
-        return $handler($request);
-    }
 }

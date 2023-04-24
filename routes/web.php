@@ -30,8 +30,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
     Route::post('/chatBots', [ChatBotsController::class, 'chatBots'])->name('chatBots');
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
-    Route::post('/sendmessage', [TelegramBotsController::class, 'sendmessage'])->name('sendmessage');
-    Route::post('/setwebhook', [TelegramBotsController::class, 'setwebhook'])->name('setwebhook');
 });
 
 Route::post('/webhook', [TelegramBotsController::class, 'TelegramBotLogic'])->name('TelegramBotLogic');

@@ -20,6 +20,7 @@ class BotFactory extends Factory
             'name' => fake()->name,
             'token' => fake()->linuxPlatformToken,
             'webhook' => false,
+            'url' => fake()->url,
 
 
         ];
