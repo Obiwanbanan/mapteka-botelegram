@@ -11,8 +11,8 @@ export function addBot() {
             const form = document.querySelector('.major__content--add-bot')
             const action = form.querySelector('#action')
             const name = form.querySelector('#name')
-            const username = form.querySelector('#username')
             const token = form.querySelector('#token')
+            const url = form.querySelector('#url')
             $.ajax({
                 url: 'chatBots',
                 method: 'POST',
@@ -24,7 +24,6 @@ export function addBot() {
                     "page": 'chatbots',
                     "action": action.value,
                     "name": name.value,
-                    "username": username.value,
                     "token": token.value,
                 },
 
@@ -34,8 +33,27 @@ export function addBot() {
                     addBotModal()
                     choiceBot()
                     editBot()
+                    setWebhook(csrf, url, token)
                 },
             });
         })
     }
+}
+function setWebhook(csrf, url, token) {
+    $.ajax({
+        url: 'setwebhook',
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrf
+        },
+
+        data: {
+            "url": url.value,
+            "token": token.value,
+        },
+
+        success: function (response) {
+            console.log(response)
+        },
+    });
 }

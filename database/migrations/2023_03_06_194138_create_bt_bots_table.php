@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('bots', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('username'); // It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
             $table->string('token');
+            $table->boolean('webhook');
             $table->timestamps();
         });
 

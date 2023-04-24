@@ -13,8 +13,8 @@
         <input class="input" id="action" type="hidden" name="action" value="add">
         <input class="input" id="page" type="hidden" name="page" value="settings">
         <input class="input" id="name" type="text" name="name" placeholder="Name">
-        <input class="input" id="username" type="text" name="username" placeholder="Username">
         <input class="input" id="token" type="text" name="token" placeholder="Token">
+        <input class="input" id="url" type="text" name="url" placeholder="Url webhook">
 
         <button class="btn">
             {{ __('Register') }}

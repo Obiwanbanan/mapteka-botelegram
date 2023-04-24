@@ -20,7 +20,6 @@ class ChatBotsHandler
 
         $choiceBot = $this->choiceBot($action, $request);
         $chatBots = $this->getAllBots();
-
         return response()->json([
             'status' => true,
             'html' => view('ajax/' . $page, compact('chatBots', 'choiceBot'))->render(),
@@ -36,7 +35,6 @@ class ChatBotsHandler
             $newBot = new Bot();
 
             $newBot->name = $request->input('name');
-            $newBot->username = $request->input('username');
             $newBot->token = $request->input('token');
 
             $newBot->save();
@@ -70,18 +68,6 @@ class ChatBotsHandler
             Bot::where('id', $id)->delete();
 
         }
-    }
-
-    private function sendMessage()
-    {
-
-        $telegram = new Api('6037349296:AAGChITqT8J8xfqBeOZk9K-sEXnUTMpNG9U');
-//            $update = $telegram->getWebhookUpdate();
-//            $chatId = $update->getMessage()->getChat()->getId();
-        $telegram->sendMessage([
-            'chat_id' => '725014793',
-            'text' => 'Welcome to my bot!'
-        ]);
     }
 
     private function getAllBots(): Collection

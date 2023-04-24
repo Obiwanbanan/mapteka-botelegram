@@ -18,8 +18,9 @@ class BotFactory extends Factory
     {
         return [
             'name' => fake()->name,
-            'username' => fake()->name . 'bot',
             'token' => fake()->linuxPlatformToken,
+            'webhook' => false,
+
 
         ];
     }

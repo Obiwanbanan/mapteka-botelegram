@@ -13,7 +13,7 @@
                 @endif
 
                 @foreach($chatBots as $chatBot)
-                    <option value="{{ $chatBot->id }}">
+                    <option id="{{ $chatBot->id }}" value="{{ $chatBot->name }}">
                         {{ $chatBot->name }}
                     </option>
                 @endforeach

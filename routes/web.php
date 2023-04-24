@@ -5,8 +5,12 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\PharmaciesController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TelegramBotsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Telegram\Bot\Api;
+use Telegram\Bot\Keyboard\Keyboard;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +30,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
     Route::post('/chatBots', [ChatBotsController::class, 'chatBots'])->name('chatBots');
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
+    Route::post('/sendmessage', [TelegramBotsController::class, 'sendmessage'])->name('sendmessage');
+    Route::post('/setwebhook', [TelegramBotsController::class, 'setwebhook'])->name('setwebhook');
 });
+
+Route::post('/webhook', [TelegramBotsController::class, 'TelegramBotLogic'])->name('TelegramBotLogic');
 
 Auth::routes([
 //    'register' => false,
