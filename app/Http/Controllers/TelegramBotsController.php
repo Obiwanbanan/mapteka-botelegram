@@ -14,9 +14,10 @@ class TelegramBotsController extends Controller
 
     public function TelegramBotLogic(
         Request         $request,
-        TelegramBotLogicHandler $handler
+        TelegramBotLogicHandler $handler,
+        $bot_token
     ): bool|string
     {
-        return $handler($request);
+        return $handler($request, $bot_token);
     }
 }

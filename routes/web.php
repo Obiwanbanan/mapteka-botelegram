@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
 });
 
-Route::post('/webhook', [TelegramBotsController::class, 'TelegramBotLogic'])->name('TelegramBotLogic');
+Route::post('/{bot_token}/webhook', [TelegramBotsController::class, 'TelegramBotLogic'])->name('TelegramBotLogic');
 
 Auth::routes([
 //    'register' => false,

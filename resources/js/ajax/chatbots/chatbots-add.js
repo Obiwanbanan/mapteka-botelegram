@@ -25,6 +25,7 @@ export function addBot() {
                     "action": action.value,
                     "name": name.value,
                     "token": token.value,
+                    "url": url.value,
                 },
 
                 success: function (response) {
@@ -33,27 +34,8 @@ export function addBot() {
                     addBotModal()
                     choiceBot()
                     editBot()
-                    setWebhook(csrf, url, token)
                 },
             });
         })
     }
-}
-function setWebhook(csrf, url, token) {
-    $.ajax({
-        url: 'setwebhook',
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': csrf
-        },
-
-        data: {
-            "url": url.value,
-            "token": token.value,
-        },
-
-        success: function (response) {
-            console.log(response)
-        },
-    });
 }

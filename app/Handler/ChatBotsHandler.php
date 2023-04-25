@@ -5,7 +5,9 @@ namespace App\Handler;
 use App\Models\Bot;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
 use Telegram\Bot\Api;
+use Telegram\Bot\Exceptions\TelegramSDKException;
 
 class ChatBotsHandler
 {
@@ -32,12 +34,17 @@ class ChatBotsHandler
     ): void
     {
         if ($action === 'add') {
-
+            $request->validate([
+                'name' => 'required|max:55|min:2',
+                'token' => Rule::unique('bots'),
+                'url' => 'required|max:255|min:3',
+            ]);
             $status = $this->setWebhook($request);
             $newBot = new Bot();
 
             $newBot->name = $request->input('name');
             $newBot->token = $request->input('token');
+            $newBot->url = $request->input('url');
             $newBot->webhook = $status;
 
             $newBot->save();
@@ -95,6 +102,9 @@ class ChatBotsHandler
         return null;
     }
 
+    /**
+     * @throws TelegramSDKException
+     */
     private function setWebhook(
         object $request
     ): bool
@@ -103,7 +113,7 @@ class ChatBotsHandler
             $url = $request->input('url');
             $botToken = $request->input('token');
             $telegram = new Api($botToken);
-            return $telegram->setWebhook(['url' => $url . '/' . 'webhook']);
+            return $telegram->setWebhook(['url' => $url . '/' . $botToken . '/' . 'webhook']);
         } catch (\Exception $exception) {
 
             return false;
