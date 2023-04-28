@@ -9,7 +9,6 @@ use App\Http\Controllers\TelegramBotsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Telegram\Bot\Api;
-use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*

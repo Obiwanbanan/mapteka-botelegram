@@ -2,18 +2,22 @@
 
 namespace App\Handler;
 
+use App\Telegram\Commands\StartCommand;
 use Telegram\Bot\Api;
-use Telegram\Bot\Commands\HelpCommand;
 use Telegram\Bot\Exceptions\TelegramSDKException;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramBotLogicHandler
 {
-    public function __invoke($request, $bot_token )
+    public function __invoke($request, $bot_token)
     {
+        $update = Telegram::commandsHandler(true);
+        $telegram = new Api($bot_token);
 
-        return $this->isChort($bot_token);
+        $this->registrationCommand($telegram);
+
+//        $this->isChort($bot_token);
     }
 
     /**
@@ -21,11 +25,14 @@ class TelegramBotLogicHandler
      */
     private function isChort($bot_token)
     {
+
         $update = Telegram::commandsHandler(true);
         $telegram = new Api($bot_token);
-        $lastMessage = $update->getMessage()->get('text');
-        $lastIdMessage = $update->getChat()['id'];
-        $telegram->addCommand(HelpCommand::class);
+
+
+        $lastMessage = $update->getMessage()->get('text') ?? '';
+        $lastIdMessage = $update->getChat()['id'] ?? '';
+
         if ($lastMessage == 'hello') {
             $telegram->sendMessage(
                 [
@@ -44,15 +51,15 @@ class TelegramBotLogicHandler
             );
         }
 
-        return (json_encode($update));
+        return true;
     }
 
     private function keyboard(): array
     {
         return [
-            ['Поиск лекарств', 'Корзина'],
-            ['Мои заказы', 'Адреса аптек'],
-            ['Помощь']
+            ['Поиск лекарств'],
+            ['Адреса аптек', 'Корзина'],
+            ['Помощь', 'Мои заказы']
         ];
     }
 
@@ -63,5 +70,15 @@ class TelegramBotLogicHandler
             'resize_keyboard' => true,
             'one_time_keyboard' => true
         ]);
+    }
+
+    private function registrationCommand($telegram): void
+    {
+
+        Telegram::addCommands(
+            [
+                (new StartCommand())->setTelegram($telegram)
+            ]
+        );
     }
 }

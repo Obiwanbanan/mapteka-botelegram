@@ -16,7 +16,7 @@ class TelegramBotsController extends Controller
         Request         $request,
         TelegramBotLogicHandler $handler,
         $bot_token
-    ): bool|string
+    )
     {
         return $handler($request, $bot_token);
     }
