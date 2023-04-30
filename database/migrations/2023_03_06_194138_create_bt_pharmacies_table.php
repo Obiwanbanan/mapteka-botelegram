@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->string('name');
             $table->string('address');
-            $table->string('coordinate_X_for_map');
-            $table->string('coordinate_Y_for_map');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
 

@@ -2,6 +2,7 @@
 
 namespace App\Handler;
 
+use App\Models\Bot;
 use App\Telegram\Buttons\TelegramButtons;
 use App\Telegram\Commands\HelpCommand;
 use App\Telegram\Commands\StartCommand;
@@ -19,7 +20,7 @@ class TelegramBotLogicHandler
         $update = Telegram::commandsHandler(true);
         $telegram = new Api($bot_token);
         $this->registrationCommand($telegram);
-        $this->handleButtons($update, $telegram);
+        $this->handleButtons($update, $telegram, $bot_token);
     }
 
     private function registrationCommand(
@@ -35,8 +36,9 @@ class TelegramBotLogicHandler
     }
 
     private function handleButtons(
-       object $update,
-       object $telegram
+        object $update,
+        object $telegram,
+        string $bot_token
     ): void
     {
         if ($update->has('callback_query')) {
@@ -46,7 +48,11 @@ class TelegramBotLogicHandler
 
             match ($callbackData) {
                 "help" => (new TelegramButtons($telegram, $chatId))->help(),
-                "address" => (new TelegramButtons($telegram, $chatId))->address(),
+                "address" => (new TelegramButtons($telegram, $chatId))->address($bot_token),
+
+                "search" => (new TelegramButtons($telegram, $chatId))->help(),
+                "cart" => (new TelegramButtons($telegram, $chatId))->help(),
+                "orders" => (new TelegramButtons($telegram, $chatId))->help(),
             };
 
             $telegram->answerCallbackQuery([

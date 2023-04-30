@@ -9,6 +9,6 @@ class Pharmacies extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['organization_id', 'name', 'address', 'coordinate_X_for_map', 'coordinate_Y_for_map'];
+    protected $fillable = ['organization_id', 'name', 'address', 'latitude', 'longitude'];
 
 }

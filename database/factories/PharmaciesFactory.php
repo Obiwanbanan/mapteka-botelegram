@@ -19,9 +19,9 @@ class PharmaciesFactory extends Factory
         return [
             'organization_id' => fake()->numberBetween(1, 10),
             'name' => fake()->word(),
-            'address' => fake()->address(),
-            'coordinate_X_for_map' => fake()->numberBetween(1,100),
-            'coordinate_Y_for_map' => fake()->numberBetween(1,100),
+            'address' => fake()->streetAddress(),
+            'latitude' => 55.753215,
+            'longitude' => 37.622504,
         ];
     }
 }

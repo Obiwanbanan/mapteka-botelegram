@@ -45,8 +45,8 @@ class PharmaciesHandler
 
             $newPharmacy->name = $request->input('name');
             $newPharmacy->address = $request->input('address');
-            $newPharmacy->coordinate_X_for_map = $request->input('coordinate_X');
-            $newPharmacy->coordinate_Y_for_map = $request->input('coordinate_Y');
+            $newPharmacy->latitude = $request->input('coordinate_X');
+            $newPharmacy->longitude = $request->input('coordinate_Y');
             $newPharmacy->organization_id = $request->input('organizationId');
 
             $newPharmacy->save();
@@ -66,8 +66,8 @@ class PharmaciesHandler
                     [
                         'name' => $request->input('name'),
                         'address' => $request->input('address'),
-                        'coordinate_X_for_map' => $request->input('coordinate_X'),
-                        'coordinate_Y_for_map' => $request->input('coordinate_Y'),
+                        'latitude' => $request->input('coordinate_X'),
+                        'longitude' => $request->input('coordinate_Y'),
                     ]
                 );
         }
