@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Handler\ChatBotsHandler;
-use App\Handler\SetWebhookHandler;
 use App\Handler\TelegramBotLogicHandler;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
