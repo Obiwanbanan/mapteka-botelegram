@@ -50,7 +50,7 @@ class TelegramBotLogicHandler
                 "help" => (new TelegramButtons($telegram, $chatId))->help(),
                 "address" => (new TelegramButtons($telegram, $chatId))->address($bot_token),
 
-                "search" => (new TelegramButtons($telegram, $chatId))->help(),
+                "search" => (new TelegramButtons($telegram, $chatId))->search(),
                 "cart" => (new TelegramButtons($telegram, $chatId))->help(),
                 "orders" => (new TelegramButtons($telegram, $chatId))->help(),
             };

@@ -43,23 +43,29 @@ class TelegramButtons
 
         $zoom = 16;
         $answer = '';
-
-        foreach ($pharmacies as $key => $pharmacy) {
-            $yandexMapUrl = "https://yandex.ru/maps/?ll={$pharmacy->longitude},{$pharmacy->latitude}&z={$zoom}&mode=search&text={$pharmacy->latitude},{$pharmacy->longitude}";
-            $listNumber = $key + 1;
-            $answer .= "<b><a href='$yandexMapUrl'> $listNumber. $pharmacy->address </a></b>" . "\n";;
+        if (!empty($pharmacies)) {
+            foreach ($pharmacies as $key => $pharmacy) {
+                $yandexMapUrl = "https://yandex.ru/maps/?ll={$pharmacy->longitude},{$pharmacy->latitude}&z={$zoom}&mode=search&text={$pharmacy->latitude},{$pharmacy->longitude}";
+                $listNumber = $key + 1;
+                $answer .= "<b><a href='$yandexMapUrl'> $listNumber. $pharmacy->address </a></b>" . "\n";;
+            }
+        } else {
+            $answer = 'Нет данных';
         }
 
 
         $this->telegram->sendMessage(
             [
                 'chat_id' => $this->chatId,
-                'text' => $answer,
+                'text' => $answer ,
                 'disable_web_page_preview' => true,
                 'parse_mode' => 'HTML',
             ]
         );
     }
 
-
+    public function search(): void
+    {
+        var_dump('search');
+    }
 }
