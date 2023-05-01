@@ -26,8 +26,8 @@ export function organizationEdit() {
             data: {
                 "action": 'update',
                 "page": 'organizations',
-                "name": name.value,
-                "INN": INN.value,
+                "organizationName": name.value,
+                "organizationINN": INN.value,
                 "organizationId": organizationId,
                 "botId": botId,
             },
