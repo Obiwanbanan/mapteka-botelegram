@@ -1,5 +1,5 @@
 <h1>
-    Chat bots
+    Чат боты
 </h1>
 
 <div class="major__content-container">
@@ -8,7 +8,7 @@
             <select>
                 @if(!$choiceBot)
                     <option>
-                        Not selected
+                        Не выбран
                     </option>
                 @endif
 
@@ -21,17 +21,17 @@
         </div>
         <div class="chatbots__add">
             <button class="btn">
-                Add
+                Добавить
             </button>
         </div>
         <div class="chatbots__edit">
             <button class="btn">
-                Edit
+                Редактирвать
             </button>
         </div>
         <div class="chatbots__remove">
             <button class="btn">
-                Remove
+                Удалить
             </button>
         </div>
     </div>

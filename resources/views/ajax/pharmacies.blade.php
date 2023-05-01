@@ -23,13 +23,13 @@
     </div>
     <div class="major__content-pharmacies-actions">
         <button class="major__content-btn edit btn">
-            Edit Organization
+            Редактирвать организацию
             <input id="action" type="hidden" name="action">
             <input id="page" type="hidden" name="page" value="organizations">
         </button>
 
         <button class="major__content-btn remove btn">
-            Remove Organization
+            Удалить организацию
             <input id="action" type="hidden" name="action">
             <input id="page" type="hidden" name="page" value="organizations">
         </button>
@@ -41,11 +41,11 @@
         <input class="input" id='search' type="text" placeholder="Search">
         <input class="input" id="action" type="hidden" name="action" value="search">
         <button class="btn">
-            Search
+            Поиск
         </button>
     </div>
     <button class="major__content-btn add btn ">
-        Add pharmacy
+        Добавить аптеку
     </button>
 </div>
 <div class="major__content-pharmacies">
@@ -56,13 +56,13 @@
                 №
             </td>
             <td>
-                Name
+                Имя
             </td>
             <td>
-                Address
+                Адрес
             </td>
             <td>
-                Actions
+                Действия
             </td>
 
         </tr>
@@ -74,9 +74,9 @@
                 <td class="name"> {{ $pharmacy->name }} </td>
                 <td class="address"> {{ $pharmacy->address }} </td>
                 <td>
-                    <button class="btn map">Map</button>
-                    <button class="btn edit" id="{{ $pharmacy->id }}">Edit</button>
-                    <button class="btn remove" id="{{ $pharmacy->id }}">Remove
+                    <button class="btn map">Карта</button>
+                    <button class="btn edit" id="{{ $pharmacy->id }}">Редактирвать</button>
+                    <button class="btn remove" id="{{ $pharmacy->id }}">Удалить
                         <input id="action" type="hidden" name="action" value="remove">
                         <input id="page" type="hidden" name="page" value="organizations">
                     </button>

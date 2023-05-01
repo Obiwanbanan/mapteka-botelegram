@@ -7,21 +7,16 @@
                 @csrf
                 @error('email')
                 <div class="login__error-section">
-
                     {{ $message }}
                 </div>
                 @enderror
 
                 @error('password')
                 <div class="login__error-section">
-
                     {{ $message }}
                 </div>
-
                 @enderror
                 <div class="login__wrapper">
-
-
                     <div class="login__email">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
@@ -35,18 +30,13 @@
                         <input id="password" type="password"
                                class="form-control @error('password') is-invalid @enderror" name="password" required
                                autocomplete="current-password" placeholder="Password">
-
-
                     </div>
                 </div>
 
-
                 <button type="submit" class="btn">
-                    {{ __('Log in') }}
+                    {{ __('Вход') }}
                 </button>
             </form>
-
-
         </div>
     </div>
 @endsection

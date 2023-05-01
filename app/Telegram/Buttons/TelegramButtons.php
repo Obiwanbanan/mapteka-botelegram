@@ -36,10 +36,11 @@ class TelegramButtons
         string $bot_token
     ): void
     {
-        $botId = Bot::where('token', $bot_token)->value('id');
-        $organizationId = Organization::where('bot_id', $botId)->value('id');
-        $pharmacies = Pharmacies::where('organization_id', $organizationId)
-            ->get(['address', 'latitude', 'longitude']);
+        $pharmacies = Pharmacies::join('organizations', 'pharmacies.organization_id', '=', 'organizations.id')
+            ->join('bots', 'organizations.bot_id', '=', 'bots.id')
+            ->where('bots.token', $bot_token)
+            ->select('pharmacies.address', 'pharmacies.latitude', 'pharmacies.longitude')
+            ->get();
 
         $zoom = 16;
         $answer = '';

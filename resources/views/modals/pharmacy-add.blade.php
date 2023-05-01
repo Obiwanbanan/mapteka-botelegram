@@ -1,7 +1,7 @@
 <div class="major__pharmacy-add-modal modal">
     <div class="major__content-pharmacy-add-modal">
         <h2>
-            Add new pharmacy
+            Добавить аптеку
         </h2>
         <span class="major__pharmacy-add-modal-close">
            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32" viewBox="0 0 32 32">
@@ -12,15 +12,15 @@
         </span>
         <input class="input" id="action" type="hidden" name="action" value="add">
         <input class="input" id="page" type="hidden" name="page" value="pharmacy">
-        <input class="input" id="pharmacy-name" type="text" name="pharmacy-name" placeholder="Pharmacy Name">
-        <input class="input" id="pharmacy-address" type="text" name="pharmacy-address" placeholder="Pharmacy Address">
+        <input class="input" id="pharmacy-name" type="text" name="pharmacy-name" placeholder="Имя">
+        <input class="input" id="pharmacy-address" type="text" name="pharmacy-address" placeholder="Адрес">
         <input class="input" id="pharmacy-coordinate_X" type="text" name="coordinate_X"
-               placeholder="coordinate X for map">
+               placeholder="Долгота">
         <input class="input" id="pharmacy-coordinate_Y" type="text" name="coordinate_Y"
-               placeholder="coordinate Y for map">
+               placeholder="Широта">
 
         <button class="btn">
-            {{ __('Register') }}
+            {{ __('Добавить') }}
         </button>
     </div>
 </div>
