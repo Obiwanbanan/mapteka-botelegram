@@ -11,7 +11,7 @@
                         </svg>
                     </div>
                     <div class="major__menu-title">
-                        Dashboard
+                        Панель приборов
                     </div>
                 </div>
                 <div id="organizations" class="major__menu-organizations major__menu-btn">
@@ -27,7 +27,7 @@
                         </svg>
                     </div>
                     <div class="major__menu-title">
-                        Organizations
+                        Организации
                     </div>
                 </div>
                 <div id="chatbots" class="major__menu-chat-bots major__menu-btn">
@@ -39,7 +39,7 @@
                         </svg>
                     </div>
                     <div class="major__menu-title">
-                        Chat bots
+                        Чат боты
                     </div>
                 </div>
                 <div id="settings" class="major__menu-settings major__menu-btn">
@@ -51,7 +51,7 @@
                         </svg>
                     </div>
                     <div class="major__menu-title">
-                        Settings
+                        Настройки
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                             </svg>
                         </span>
                         <span class="major__menu-title">
-                            Logout
+                            Выйти
                         </span>
                     </button>
 

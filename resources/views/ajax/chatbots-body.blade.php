@@ -1,6 +1,6 @@
 @if(!empty($choiceBot))
     @php
-        $status = $choiceBot->webhook ? 'active' : 'deactivate'
+        $status = $choiceBot->webhook ? 'Активный' : 'Неактивный'
     @endphp
     <div class="chatbots__body-wrapper">
         <div class="chatbots__fields">
