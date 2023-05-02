@@ -30,7 +30,7 @@
 
         <button class="major__content-btn remove btn">
             Удалить организацию
-            <input id="action" type="hidden" name="action">
+            <input id="action" type="hidden" name="action" value="remove">
             <input id="page" type="hidden" name="page" value="organizations">
         </button>
     </div>

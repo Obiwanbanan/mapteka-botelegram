@@ -9,7 +9,7 @@ export function ajaxRemoveOrganization() {
         const majorContent = document.querySelector('.major__content')
         const pharmaciesHeader = document.querySelector('.major__content-pharmacies-header')
         const organizationId = pharmaciesHeader.getAttribute('data-id-organization');
-        const action = pharmaciesHeader.querySelector('#action')
+        const action = pharmaciesHeader.querySelector('.remove #action')
         const page = pharmaciesHeader.querySelector('#page');
 
         $.ajax({
@@ -21,7 +21,7 @@ export function ajaxRemoveOrganization() {
 
             data: {
                 "action": action.value,
-                "id": organizationId,
+                "organizationId": organizationId,
                 "page": page.value,
 
             },

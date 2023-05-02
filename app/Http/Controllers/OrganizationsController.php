@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Handler\OrganizationHandler;
+use App\Handler\Organization\OrganizationHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-
 class OrganizationsController extends Controller
 {
-    public function index()
+    public function index(): string
     {
-        return view('home');
+        return view('organizations/index');
     }
 
     public function organization(
-        Request             $request,
+        Request $request,
         OrganizationHandler $handler
-    ): JsonResponse
-    {
+    ): JsonResponse {
         return $handler($request);
     }
 }

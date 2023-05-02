@@ -81,24 +81,3 @@
         </div>
     </div>
 </section>
-
-{{--<script>--}}
-{{--    $('#organizations').on('submit', function (event) {--}}
-{{--        event.preventDefault();--}}
-{{--        console.log('qwe')--}}
-{{--        $.ajax({--}}
-{{--            url: "/organizations",--}}
-{{--            type: "POST",--}}
-{{--            data: {--}}
-{{--                "_token": "{{ csrf_token() }}",--}}
-{{--                name: 'test',--}}
-{{--            },--}}
-{{--            success: function (response) {--}}
-{{--                console.log(response)--}}
-{{--            },--}}
-
-{{--        });--}}
-{{--    });--}}
-
-
-{{--</script>--}}
