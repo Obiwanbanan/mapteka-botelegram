@@ -2,62 +2,71 @@
 
 namespace App\Handler;
 
-use App\Models\Bot;
 use App\Telegram\Buttons\TelegramButtons;
 use App\Telegram\Commands\HelpCommand;
 use App\Telegram\Commands\StartCommand;
+use App\Telegram\Keyboard\TelegramKeyboard;
+use Illuminate\Http\Request;
 use Telegram\Bot\Api;
-use Telegram\Bot\Exceptions\TelegramSDKException;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Telegram\Bot\Objects\Update;
 
 class TelegramBotLogicHandler
 {
-    /**
-     * @throws TelegramSDKException
-     */
-    public function __invoke($request, $bot_token)
+    private ?string $botToken = null;
+    public function __invoke(
+        Request $request,
+        string  $botToken,
+    ): void
     {
-        $update = Telegram::commandsHandler(true);
-        $telegram = new Api($bot_token);
-        $this->registrationCommand($telegram);
-        $this->handleButtons($update, $telegram, $bot_token);
+        $this->botToken = $botToken;
+        $this->registrationCommands();
+        $this->handleButtons();
     }
 
-    private function registrationCommand(
-        object $telegram
-    ): void
+    private function getUpdateDataTelegram(): array|Update
+    {
+        return Telegram::commandsHandler(true);
+    }
+
+    private function getTelegram(): Api {
+        return new Api($this->botToken);
+    }
+
+    private function registrationCommands(): void
     {
         Telegram::addCommands(
             [
-                (new StartCommand())->setTelegram($telegram),
-                (new HelpCommand())->setTelegram($telegram)
+                (new StartCommand())->setTelegram($this->getTelegram()),
+                (new HelpCommand())->setTelegram($this->getTelegram())
             ]
         );
     }
 
-    private function handleButtons(
-        object $update,
-        object $telegram,
-        string $bot_token
-    ): void
+    private function handleButtons(): void
     {
-        if ($update->has('callback_query')) {
-            $callbackQuery = $update->getCallbackQuery();
-            $callbackData = $callbackQuery->getData();
-            $chatId = $callbackQuery->message->chat->id;
+        $updateDataTelegram = $this->getUpdateDataTelegram();
 
-            match ($callbackData) {
-                "help" => (new TelegramButtons($telegram, $chatId))->help(),
-                "address" => (new TelegramButtons($telegram, $chatId))->address($bot_token),
-
-                "search" => (new TelegramButtons($telegram, $chatId))->search(),
-                "cart" => (new TelegramButtons($telegram, $chatId))->help(),
-                "orders" => (new TelegramButtons($telegram, $chatId))->help(),
-            };
-
-            $telegram->answerCallbackQuery([
-                'callback_query_id' => $callbackQuery->getId(),
-            ]);
+        if (!$updateDataTelegram->has('callback_query')) {
+            return;
         }
+
+        $callbackQuery = $updateDataTelegram->getCallbackQuery();
+        $callbackData = $callbackQuery->getData();
+        $chatId = $callbackQuery->message->chat->id;
+
+        match ($callbackData) {
+            TelegramKeyboard::HELP => (new TelegramButtons($this->getTelegram(), $chatId))->help(),
+            TelegramKeyboard::ADDRESS => (new TelegramButtons($this->getTelegram(), $chatId))->address($this->botToken),
+            TelegramKeyboard::BACK_MAIN_MENU => (new TelegramButtons($this->getTelegram(), $chatId))->backMainMenu(),
+            TelegramKeyboard::SEARCH => (new TelegramButtons($this->getTelegram(), $chatId))->search($updateDataTelegram),
+
+            TelegramKeyboard::CART => (new TelegramButtons($this->getTelegram(), $chatId))->help(),
+            TelegramKeyboard::ORDERS => (new TelegramButtons($this->getTelegram(), $chatId))->help(),
+        };
+
+        $this->getTelegram()->answerCallbackQuery([
+            'callback_query_id' => $callbackQuery->getId(),
+        ]);
     }
 }

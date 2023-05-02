@@ -11,17 +11,15 @@ use Telegram\Bot\Keyboard\Keyboard;
 class StartCommand extends Command
 {
     protected string $name = 'start';
-    protected string $description = 'Start Command to get you started';
+    protected string $description = 'Команда для старта';
 
-    public function handle()
+    public function handle(): void
     {
         $update = $this->getUpdate();
         $chatId = $update->getChat()['id'] ?? '';
         $user = $update->getMessage()->getFrom();
         $username = $user->getFirstName() . ' ' . $user->getLastName();
         $telegram = $this->getTelegram();
-
-
         try {
             $telegram->sendMessage([
                 'chat_id' => $chatId,

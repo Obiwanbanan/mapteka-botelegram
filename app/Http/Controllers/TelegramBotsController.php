@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use App\Handler\TelegramBotLogicHandler;
 use Illuminate\Http\Request;
 
-
 class TelegramBotsController extends Controller
 {
-
     public function TelegramBotLogic(
-        Request         $request,
+        Request                 $request,
         TelegramBotLogicHandler $handler,
-        $bot_token
-    )
+        string                  $bot_token
+    ): void
     {
-        return $handler($request, $bot_token);
+        $handler($request, $bot_token);
     }
 }
