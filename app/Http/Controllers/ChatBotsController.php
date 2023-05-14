@@ -10,12 +10,16 @@ use Telegram\Bot\Api;
 
 class ChatBotsController extends Controller
 {
+public function chatBots()
+{
+    return view('chatBots/chatBots');
+}
 
-    public function chatBots(
-        Request         $request,
-        ChatBotsHandler $handler
-    ): JsonResponse
-    {
-        return $handler($request);
-    }
+//    public function chatBots(
+//        Request         $request,
+//        ChatBotsHandler $handler
+//    ): JsonResponse
+//    {
+//        return $handler($request);
+//    }
 }

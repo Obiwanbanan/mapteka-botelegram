@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 
 class OrganizationsController extends Controller
 {
-    public function index(): string
+    public function organization()
     {
-        return view('organizations/index');
+        return view('organization/organization');
     }
 
-    public function organization(
-        Request $request,
-        OrganizationHandler $handler
-    ): JsonResponse {
-        return $handler($request);
-    }
+//    public function organization(
+//        Request $request,
+//        OrganizationHandler $handler
+//    ): JsonResponse {
+//        return $handler($request);
+//    }
 }

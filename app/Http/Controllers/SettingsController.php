@@ -10,11 +10,16 @@ use Illuminate\Http\Request;
 class SettingsController extends Controller
 {
 
-    public function settings(
-        Request         $request,
-        SettingsHandler $handler
-    ): JsonResponse
+//    public function settings(
+//        Request         $request,
+//        SettingsHandler $handler
+//    ): JsonResponse
+//    {
+//        return $handler($request);
+//    }
+
+    public function settings()
     {
-        return $handler($request);
+        return view('settings/settings');
     }
 }

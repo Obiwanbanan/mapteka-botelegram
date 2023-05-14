@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatBotsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\PharmaciesController;
@@ -23,11 +24,15 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', [OrganizationsController::class, 'index'])->name('home');
-    Route::post('/menu', [MenuController::class, 'menu'])->name('menu');
-    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
-    Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
-    Route::post('/chatBots', [ChatBotsController::class, 'chatBots'])->name('chatBots');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//    Route::post('/menu', [MenuController::class, 'menu'])->name('menu');
+//    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
+//    Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
+//    Route::post('/chatBots', [ChatBotsController::class, 'chatBots'])->name('chatBots');
+
+    Route::get('/chat-bots', [ChatBotsController::class, 'chatBots'])->name('chatBots');
+    Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
+    Route::get('/organization', [OrganizationsController::class, 'organization'])->name('organization');
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
 });
 
