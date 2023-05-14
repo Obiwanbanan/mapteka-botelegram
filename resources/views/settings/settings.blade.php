@@ -1,6 +1,7 @@
 @extends('layouts.layout')
+@extends('major-menu')
 
-@section('content')
+@section('major-content')
     <h1>
         Настройки
     </h1>

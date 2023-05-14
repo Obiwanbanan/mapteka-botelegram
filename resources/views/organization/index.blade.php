@@ -1,6 +1,7 @@
 @extends('layouts.layout')
+@extends('major-menu')
 
-@section('content')
+@section('major-content')
     <div class="major__content-organization-header">
         <h1>
             Организации

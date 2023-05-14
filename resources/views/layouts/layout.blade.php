@@ -17,16 +17,7 @@
     @include('partials.header')
 </header>
 <main>
-    <section class="major">
-        <div class="container">
-            <div class="major__body">
-                @include('major-menu')
-                <div class="major__content">
-                    @yield('content')
-                </div>
-            </div>
-        </div>
-    </section>
+    @yield('content')
 </main>
 <footer>
     @include('partials.footer')
