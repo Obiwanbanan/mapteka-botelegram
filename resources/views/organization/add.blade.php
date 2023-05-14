@@ -1,4 +1,6 @@
-<div class="major__content-organization-modal modal">
+@extends('layouts.layout')
+
+@section('content')
     <div class="major__content-organization-add">
         <h2>
             Добавить организацию
@@ -27,4 +29,4 @@
             {{ __('Добавить') }}
         </button>
     </div>
-</div>
+@endsection
