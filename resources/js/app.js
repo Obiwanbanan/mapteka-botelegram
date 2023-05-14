@@ -5,7 +5,7 @@
  */
 
 import './bootstrap';
-import './ajax/major-content'
+import './ajax/main'
 import { createApp } from 'vue';
 
 /**

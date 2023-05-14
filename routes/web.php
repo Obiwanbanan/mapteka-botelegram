@@ -29,11 +29,17 @@ Route::group(['middleware' => ['auth']], function () {
 //    Route::post('/menu', [MenuController::class, 'menu'])->name('menu');
 //    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
 //    Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
-//    Route::post('/chatBots', [ChatBotsController::class, 'chatBots'])->name('chatBots');
+//    Route::post('/chatBots', [ChatBotsController::class, 'index'])->name('chatBots');
 
-    Route::get('/chat-bots', [ChatBotsController::class, 'chatBots'])->name('chat-bots');
+    Route::prefix('chat-bots')->group(function () {
+        Route::get('/', [ChatBotsController::class, 'index'])->name('chat-bots');
+        Route::get('/add', [OrganizationsController::class, 'add'])->name('chat-bots-add');
+        Route::get('/edit/{id}', [OrganizationsController::class, 'edit'])->name('chat-bots-edit');
+        Route::post('/delete/{id}', [OrganizationsController::class, 'delete'])->name('chat-bots-delete');
+    });
+
     Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
-    Route::prefix('organization')->group(function (){
+    Route::prefix('organization')->group(function () {
         Route::get('/', [OrganizationsController::class, 'index'])->name('organization');
         Route::get('/add', [OrganizationsController::class, 'add'])->name('organization');
         Route::get('/edit/{id}', [OrganizationsController::class, 'edit'])->name('organization');

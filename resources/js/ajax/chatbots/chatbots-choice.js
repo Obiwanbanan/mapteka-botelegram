@@ -1,33 +1,24 @@
-import {addBotModal} from "./chatbots-add-modal";
-import {addBot} from "./chatbots-add";
+class ChatBotsChoice {
+    constructor() {
+        this.selectBots = document.querySelector('.chatbots__choice select');
+        this.name = document.querySelector('.chatbots__fields #name');
+        this.token = document.querySelector('.chatbots__fields #token');
+        this.url = document.querySelector('.chatbots__fields #url');
+        this.status = document.querySelector('.chatbots__status span');
+        this.init()
+    }
 
-export function choiceBot() {
-    const selectBots = document.querySelector('.chatbots__choice select')
-    if (selectBots) {
-        selectBots.addEventListener('change', (e) => {
-            const csrf = document.querySelector('meta[name="_token"]').content;
-            const botId = selectBots.options[selectBots.selectedIndex].id
-            const body = document.querySelector('.chatbots__body')
+    init() {
+        this.selectBots && this.selectBots.addEventListener('change', (e) => {
+            const selectedOption = e.target.selectedOptions[0];
+            const {name, token, url, webhook} = selectedOption.dataset;
 
-            $.ajax({
-                url: 'chatBots',
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrf
-                },
-
-                data: {
-                    "page": 'chatbots-body',
-                    "action": 'choice',
-                    "botId": botId,
-                },
-
-                success: function (response) {
-                    body.innerHTML = response.html
-                    addBotModal()
-                    addBot()
-                },
-            });
+            this.name.value = name;
+            this.token.value = token;
+            this.url.value = url;
+            this.status.textContent = !!Number(webhook) ? 'Активный' : 'Неактивный';
         })
     }
 }
+
+new ChatBotsChoice()
