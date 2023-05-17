@@ -15,26 +15,38 @@
             </svg>
         </span>
 
-            <input class="input" id="name" type="text" name="name" placeholder="Имя" value="{{$organization['name']}}">
 
+            <input class="input" id="name" type="text" name="name" placeholder="Имя"
+                   value="{{$organization['name']}}">
             <input class="input" id="INN" type="text" name="INN" placeholder="INN" value="{{$organization['INN']}}">
-
             <select>
                 @foreach($chatBots as $chatBot)
                     <option id="{{ $chatBot->id }}"
                             value="{{ $chatBot->name }}"
                             @if($chatBot->id === $organization['bot_id'])
                                 selected
-                            @endif
+                        @endif
                     >
                         {{ $chatBot->name }}
                     </option>
                 @endforeach
             </select>
-
-            <button id="" class="btn">
-                {{ __('Обновить') }}
-            </button>
+            <div>
+{{--                <form method="POST" action="{{ route('organization.delete', ['id' => $organization['id']]) }}">--}}
+{{--                    @method('PATCH')--}}
+{{--                    @csrf--}}
+                    <button id="" class="btn">
+                        {{ __('Обновить') }}
+                    </button>
+{{--                </form>--}}
+                <form method="POST" action="{{ route('organization.delete', ['id' => $organization['id']]) }}">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn" type="submit">
+                        Удалить
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

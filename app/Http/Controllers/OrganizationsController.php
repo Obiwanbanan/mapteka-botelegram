@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Handler\Organization\OrganizationHandler;
 use App\Models\Bot;
 use App\Models\Organization;
+use App\Models\Pharmacies;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -18,13 +19,29 @@ class OrganizationsController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function show($id)
     {
         return view('organization/edit', [
             'organization' => Organization::where('id', $id)->get()->toArray()[0],
             'chatBots' => Bot::all()
         ]);
     }
+
+    public function delete($id)
+    {
+        Pharmacies::where('organization_id', $id)->delete();
+        Organization::where('id', $id)->delete();
+
+        return redirect('organization');
+    }
+
+//    public function editOrganization($id)
+//    {
+//        Pharmacies::where('organization_id', $id)->delete();
+//        Organization::where('id', $id)->delete();
+//
+//        return redirect('organization');
+//    }
 
     public function add(): string
     {
@@ -33,10 +50,7 @@ class OrganizationsController extends Controller
         ]);
     }
 
-    public function delete()
-    {
 
-    }
 
 
 
