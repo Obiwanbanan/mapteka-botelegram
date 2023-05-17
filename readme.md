@@ -1,6 +1,8 @@
-docker-compose up -d
+docker-compose start   -   
+docker-compose up -d   -  запускает контейнеры
 composer install --ignore-platform-reqs
-node -v
-nvm use v18.7.0 
-npm i
+node -v   - проверка версии ноды
+npm run dev  - сборщик стилей
+nvm use v18.7.0   -  обновление ноды до 18 версии если надо
+npm i   -  установка npm если слетает
 

@@ -42,8 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('organization')->group(function () {
         Route::get('/', [OrganizationsController::class, 'index'])->name('organization');
         Route::get('/add', [OrganizationsController::class, 'add'])->name('organization');
-        Route::get('/edit/{id}', [OrganizationsController::class, 'edit'])->name('organization');
-        Route::post('/delete/{id}', [OrganizationsController::class, 'delete'])->name('organization');
+        Route::get('/{id}/edit', [OrganizationsController::class, 'edit'])->name('organization');
+        Route::post('/{id}/delete', [OrganizationsController::class, 'delete'])->name('organization');
     });
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
 });

@@ -18,11 +18,12 @@ class OrganizationsController extends Controller
         ]);
     }
 
-    public function edit($id): string
+    public function edit($id)
     {
-        /** @var Organization $organization */
-        $organization = Organization::where('id', $id)->get();
-        dd($organization);
+        return view('organization/edit', [
+            'organization' => Organization::where('id', $id)->get()->toArray()[0],
+            'chatBots' => Bot::all()
+        ]);
     }
 
     public function add(): string
