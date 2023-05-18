@@ -15,38 +15,50 @@
             </svg>
         </span>
 
+            <form method="POST" action="{{ route('organization.edit', ['id' => $organization['id']]) }}">
+                <input class="input" id="name" type="text" name="name" placeholder="Имя"
+                       value="{{$organization['name']}}">
+                <input class="input" id="INN" type="text" name="INN" placeholder="INN"
+                       value="{{$organization['INN']}}">
+                <select name="botId">
+                    @foreach($chatBots as $chatBot)
+                        <option value="{{ $chatBot->id }}"
+                                @if($chatBot->id === $organization['bot_id'])
+                                    selected
+                            @endif
+                        >
+                            {{ $chatBot->name }}
+                        </option>
+                    @endforeach
+                </select>
 
-            <input class="input" id="name" type="text" name="name" placeholder="Имя"
-                   value="{{$organization['name']}}">
-            <input class="input" id="INN" type="text" name="INN" placeholder="INN" value="{{$organization['INN']}}">
-            <select>
-                @foreach($chatBots as $chatBot)
-                    <option id="{{ $chatBot->id }}"
-                            value="{{ $chatBot->name }}"
-                            @if($chatBot->id === $organization['bot_id'])
-                                selected
-                        @endif
-                    >
-                        {{ $chatBot->name }}
-                    </option>
-                @endforeach
-            </select>
-            <div>
-{{--                <form method="POST" action="{{ route('organization.delete', ['id' => $organization['id']]) }}">--}}
-{{--                    @method('PATCH')--}}
-{{--                    @csrf--}}
-                    <button id="" class="btn">
-                        {{ __('Обновить') }}
-                    </button>
-{{--                </form>--}}
-                <form method="POST" action="{{ route('organization.delete', ['id' => $organization['id']]) }}">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn" type="submit">
-                        Удалить
-                    </button>
-                </form>
-            </div>
+                @method('GET')
+                @csrf
+                <button id="" class="btn">
+                    Обновить
+                </button>
+                @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                @error('INN')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+            </form>
+
+            <form method="POST" action="{{ route('organization.delete', ['id' => $organization['id']]) }}">
+                @method('DELETE')
+                @csrf
+                <button class="btn" type="submit">
+                    Удалить
+                </button>
+            </form>
         </div>
+    </div>
     </div>
 @endsection

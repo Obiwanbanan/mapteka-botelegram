@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Handler\Organization\OrganizationHandler;
+use App\Http\Requests\OrganizationsRequest;
 use App\Models\Bot;
 use App\Models\Organization;
 use App\Models\Pharmacies;
@@ -35,13 +36,21 @@ class OrganizationsController extends Controller
         return redirect('organization');
     }
 
-//    public function editOrganization($id)
-//    {
-//        Pharmacies::where('organization_id', $id)->delete();
-//        Organization::where('id', $id)->delete();
-//
-//        return redirect('organization');
-//    }
+    public function edit($id, OrganizationsRequest $request)
+    {
+
+        Organization::where('id', $id)
+            ->update(
+                [
+                    'name' => $request->input('name'),
+                    'INN' => $request->input('INN'),
+                    'bot_id' => $request->input('botId'),
+                ]
+            );
+
+        return redirect('organization/' .$id)->with('success', 'Организация успешно обновлена!');
+
+    }
 
     public function add(): string
     {
