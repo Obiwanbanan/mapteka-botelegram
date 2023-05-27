@@ -75,7 +75,7 @@ class TelegramBotLogicHandler
             TelegramKeyboard::HELP => (new TelegramButtons($this->getTelegram(), $this->getChatId()))->help(),
             TelegramKeyboard::ADDRESS => (new TelegramButtons($this->getTelegram(), $this->getChatId()))->address($this->botToken),
             TelegramKeyboard::BACK_MAIN_MENU => (new TelegramButtons($this->getTelegram(), $this->getChatId()))->backMainMenu(),
-            TelegramKeyboard::SEARCH => (new TelegramButtons($this->getTelegram(), $this->getChatId()))->search($updateDataTelegram),
+            TelegramKeyboard::SEARCH => (new TelegramButtons($this->getTelegram(), $this->getChatId()))->search(),
 
             TelegramKeyboard::CART => (new TelegramButtons($this->getTelegram(), $this->getChatId()))->help(),
             TelegramKeyboard::ORDERS => (new TelegramButtons($this->getTelegram(), $this->getChatId()))->help(),
@@ -98,8 +98,11 @@ class TelegramBotLogicHandler
         if (!$state) {
             return;
         }
+
+        $updateDataTelegram = $this->getUpdateDataTelegram();
+
         match ($state) {
-            SearchState::WAITING_FOR_CITY => (new TelegramSearchHandler($this->getTelegram(), $this->getChatId()))->searchCity(),
+            SearchState::WAITING_FOR_CITY => (new TelegramSearchHandler($this->getTelegram(), $this->getChatId()))->searchCity($updateDataTelegram),
             default => null
         };
     }

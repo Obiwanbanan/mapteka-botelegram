@@ -22,10 +22,7 @@ class StartCommand
     }
     public function start(): void
     {
-        var_dump($this->chatId);
         try {
-            var_dump('zzzzzzzz');
-
             $this->telegram->sendMessage([
                 'chat_id' => $this->chatId,
                 'text' => 'Привет',

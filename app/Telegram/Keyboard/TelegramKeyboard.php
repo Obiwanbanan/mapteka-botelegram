@@ -15,7 +15,7 @@ class TelegramKeyboard
         self::ORDERS => 'Мои заказы',
         self::BACK_MAIN_MENU => 'Главное меню',
         self::FIND_CURE => 'Найти лекарство',
-        self::FIND_CITY => 'Найти город 🔍',
+        self::CANCEL => '❌ Отмена',
     ];
     public const SEARCH = 'search';
     public const ADDRESS = 'address';
@@ -24,7 +24,7 @@ class TelegramKeyboard
     public const ORDERS = 'orders';
     public const BACK_MAIN_MENU = 'backMainMenu';
     public const FIND_CURE = 'findCure';
-    public const FIND_CITY = 'findCity';
+    public const CANCEL = 'cancel';
 
     public static function mainMenu(): Keyboard
     {
@@ -73,18 +73,30 @@ class TelegramKeyboard
                 ]);
     }
 
-    public static function menuSearchCity(): Keyboard
+    public static function menuSearchResult(
+        object $searchResult
+    ): Keyboard
     {
-        return
-            Keyboard::make()
-                ->inline()
-                ->row([
-                        Keyboard::inlineButton([
-                            'text' => self::MAPPING_BUTTONS[self::FIND_CITY],
-                            'callback_data' => self::FIND_CITY,
-                        ]),
-                    ]
-                );
-    }
+        $keyboard = Keyboard::make()->inline();
 
+        foreach ($searchResult as $item) {
+            $keyboard->row(
+                [
+                    Keyboard::inlineButton([
+                        'text' => $item,
+                        'callback_data' => strtolower($item) . 'callback_data',
+                    ]),
+                ]
+            );
+        }
+
+        $keyboard->row([
+            Keyboard::inlineButton([
+                'text' => self::MAPPING_BUTTONS[self::CANCEL],
+                'callback_data' => self::BACK_MAIN_MENU,
+            ]),
+        ]);
+
+        return $keyboard;
+    }
 }
