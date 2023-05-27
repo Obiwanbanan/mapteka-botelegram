@@ -10,7 +10,7 @@ class OrganizationsController extends Controller
 {
     public function index(): string
     {
-        return view('organizations/index');
+        return view('home');
     }
 
     public function organization(

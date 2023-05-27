@@ -14,6 +14,8 @@ class TelegramKeyboard
         self::HELP => 'Помощь',
         self::ORDERS => 'Мои заказы',
         self::BACK_MAIN_MENU => 'Главное меню',
+        self::FIND_CURE => 'Найти лекарство',
+        self::FIND_CITY => 'Найти город 🔍',
     ];
     public const SEARCH = 'search';
     public const ADDRESS = 'address';
@@ -21,6 +23,9 @@ class TelegramKeyboard
     public const HELP = 'help';
     public const ORDERS = 'orders';
     public const BACK_MAIN_MENU = 'backMainMenu';
+    public const FIND_CURE = 'findCure';
+    public const FIND_CITY = 'findCity';
+
     public static function mainMenu(): Keyboard
     {
         return
@@ -74,16 +79,12 @@ class TelegramKeyboard
             Keyboard::make()
                 ->inline()
                 ->row([
-                    Keyboard::inlineButton([
-                        'text' => '🔍 Поиск',
-                    ]),
-                ])
-                ->row([
                         Keyboard::inlineButton([
-                            'text' => self::MAPPING_BUTTONS[self::BACK_MAIN_MENU],
-                            'callback_data' => self::BACK_MAIN_MENU,
+                            'text' => self::MAPPING_BUTTONS[self::FIND_CITY],
+                            'callback_data' => self::FIND_CITY,
                         ]),
                     ]
                 );
     }
+
 }

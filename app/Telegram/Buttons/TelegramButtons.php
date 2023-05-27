@@ -2,7 +2,9 @@
 
 namespace App\Telegram\Buttons;
 
+use App\Models\ChatState;
 use App\Models\Pharmacies;
+use App\Enums\SearchState;
 use App\Telegram\Keyboard\TelegramKeyboard;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
@@ -71,39 +73,44 @@ class TelegramButtons
 
     public function search(
        object $updateDataTelegram
-    ): void
+    ):void
     {
-        try {
-            $keyboard = Keyboard::make([
-                'keyboard' => [
-                    [
-                        ['text' => '🔍 Поиск'],
-                    ],
-                ],
-                'resize_keyboard' => true,
-                'one_time_keyboard' => true,
-                'input_field_placeholder' => 'Введите текст для поиска...',
-            ]);
-            $response = $this->telegram->sendMessage([
-                'chat_id' => $this->chatId,
-                'text' => 'Нажмите на кнопку "Поиск" для начала поиска',
-                'reply_markup' => $keyboard,
-            ]);
+         try {
+            // РАБОЧИЙ ВАРИАНТ
+//             // Отправляем пользователю сообщение с клавиатурой
+             $this->telegram->sendMessage([
+                 'chat_id' => $this->chatId,
+                 'text' => 'Введите Ваш город',
+             ]);
 
-            $chat_id = $response->getChat()->getId();
-            $message_id = $response->getMessageId();
+             ChatState::updateOrCreate(['chat_id' => $this->chatId], ['state' => SearchState::WAITING_FOR_CITY]);
 
-                // Обрабатываем введенное значение
-            if ($updateDataTelegram->getMessage()->getText() && $updateDataTelegram->getMessage()->getChat()->getId() == $chat_id) {
-                $search_query = $updateDataTelegram->getMessage()->getText();
 
-                // Отправляем обновленное сообщение с результатами поиска
-                $this->telegram->editMessageText([
-                    'chat_id' => $chat_id,
-                    'message_id' => $message_id,
-                    'text' => "Вы искали: $search_query",
-                ]);
-            }
+//             // Получаем ID чата и ID сообщения, чтобы в дальнейшем обновить текст сообщения
+//             $chat_id = $response->getChat()->getId();
+//             $message_text = $response->getText();
+//             $message_id = $response->getMessageId();
+//             if ($updateDataTelegram->getMessage()->getText() && $updateDataTelegram->getMessage()->getChat()->getId() == $chat_id) {
+//                 $search_query = $updateDataTelegram->getMessage()->getText();
+//
+////                 // Отправляем обновленное сообщение с текстом "Вы искали: ..."
+//                 $this->telegram->editMessageText([
+//                     'chat_id' => $chat_id,
+//                     'message_id' => $message_id,
+//                     'text' => "Вы искали: $search_query",
+//                 ]);
+////                 // Выполняем поиск с помощью Google Custom Search API
+////
+////                 // Получаем результаты поиска
+//                 $result = 'test';
+////
+////                 // Отправляем результаты поиска обратно пользователю
+//                 $this->telegram->sendMessage([
+//                     'chat_id' => $chat_id,
+//                     'text' => print_r($result, true), // Выводим результаты в виде строки
+//                 ]);
+//             }
+
         } catch (TelegramResponseException $e) {
             Log::error($e->getMessage());
         }
@@ -125,4 +132,13 @@ class TelegramButtons
             ]
         );
     }
+
+    public function searchCity() {
+        $this->telegram->sendMessage([
+            'text' => print_r('test', true), // Выводим результаты в виде строки
+            'chat_id' => $this->chatId,
+            'reply_markup' => TelegramKeyboard::menuSearchCity()
+        ]);
+    }
+
 }
