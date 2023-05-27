@@ -58,6 +58,10 @@ class OrganizationsController extends Controller
         ]);
     }
 
+    public function search() {
+        dd(1);
+    }
+
 
 
 

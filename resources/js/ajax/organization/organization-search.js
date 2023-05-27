@@ -1,38 +1,60 @@
+import {ajaxAddOrganization} from "./organization-add";
 import {organizationAddModal} from "./organization-add-modal";
 import {ajaxPharmacies} from "../pharmacy/pharmacy-main";
-import {ajaxAddOrganization} from "./organization-add";
 
-export function ajaxSearchOrganization() {
-    const btn = document.querySelector('.major__content-organization-search button')
-    btn.addEventListener('click', () => {
-        const csrf = document.querySelector('meta[name="_token"]').content;
-        const majorContent = document.querySelector('.major__content')
-        const form = document.querySelector('.major__content-organization-search')
-        const action = form.querySelector('#action')
-        const search = form.querySelector('#search')
+class Search {
+    constructor() {
+        this.url = '/organization/search';
+        this.button = document.querySelector('.major__content-organization-search button');
+        this.searchInput = document.querySelector('.major__content-organization-search #search');
+        this.csrf = document.querySelector('meta[name="_token"]').content;
 
+
+        this.init()
+    }
+
+    init() {
+        this.search()
+    }
+
+
+
+    search() {
+        if (this.searchInput) {
+            this.searchInput.addEventListener('input', () => {
+                clearTimeout(this.timer);
+
+                this.timer = setTimeout(() => {
+                    this.ajaxFilterOrSearch();
+                }, 400);
+            });
+
+            this.searchButton && this.searchButton.addEventListener('click', () => {
+                this.ajaxFilterOrSearch();
+            })
+        }
+
+    }
+
+
+
+    ajaxFilterOrSearch() {
         $.ajax({
-            url: '/organization',
-            method: 'POST',
+            url: this.url,
+            method: 'GET',
             headers: {
-                'X-CSRF-TOKEN': csrf
+                'X-CSRF-TOKEN': this.csrf
             },
 
             data: {
-                "action": action.value,
-                "search": search.value,
-                "page": 'organizations',
+                "search": this.searchInput.value,
+                "action": 'search',
             },
-
             success: function (response) {
-                majorContent.innerHTML = response.html
-                organizationAddModal()
-                ajaxAddOrganization()
-                ajaxPharmacies()
-                ajaxSearchOrganization()
+                console.log(response)
             },
-
         });
-
-    })
+    }
 }
+
+new Search();

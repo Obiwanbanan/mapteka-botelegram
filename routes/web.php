@@ -41,10 +41,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
     Route::prefix('organization')->group(function () {
         Route::get('/', [OrganizationsController::class, 'index'])->name('organization');
-        Route::get('/{id}/', [OrganizationsController::class, 'show'])->name('organization.show');
         Route::get('/add', [OrganizationsController::class, 'add'])->name('organization.add');
         Route::get('/{id}/edit', [OrganizationsController::class, 'edit'])->name('organization.edit');
         Route::delete('/{id}/delete', [OrganizationsController::class, 'delete'])->name('organization.delete');
+        Route::get('/search', [OrganizationsController::class, 'search'])->name('organization.search');
+        Route::get('/{id}/', [OrganizationsController::class, 'show'])->name('organization.show');
+
     });
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
 });

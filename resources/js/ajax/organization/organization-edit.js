@@ -1,7 +1,6 @@
 import {organizationAddModal} from "./organization-add-modal";
 import {ajaxPharmacies} from "../pharmacy/pharmacy-main";
 import {ajaxAddOrganization} from "./organization-add";
-import {ajaxSearchOrganization} from "./organization-search";
 
 export function organizationEdit() {
     const btn = document.querySelector('.major__organization-edit-modal button')
