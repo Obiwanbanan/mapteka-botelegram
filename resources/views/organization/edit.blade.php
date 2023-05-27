@@ -34,7 +34,7 @@
 
                 @method('GET')
                 @csrf
-                <button id="" class="btn">
+                <button id="" class="custom-btn">
                     Обновить
                 </button>
                 @error('name')
@@ -54,7 +54,7 @@
             <form method="POST" action="{{ route('organization.delete', ['id' => $organization['id']]) }}">
                 @method('DELETE')
                 @csrf
-                <button class="btn" type="submit">
+                <button class="custom-btn" type="submit">
                     Удалить
                 </button>
             </form>

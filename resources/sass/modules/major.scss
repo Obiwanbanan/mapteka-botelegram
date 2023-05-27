@@ -20,7 +20,7 @@
     .major__menu {
         border-right: 1px solid $c-light-gray;
         background: $c-white;
-        width: 15%;
+        width: 20%;
         padding: 20px;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
@@ -58,6 +58,7 @@
 
     .major__menu-title {
         @include font-type-h5;
+        color: $c-black;
 
         @include _768 {
             display: none;

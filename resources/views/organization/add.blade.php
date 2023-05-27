@@ -26,7 +26,7 @@
             @endforeach
         </select>
 
-        <button class="btn">
+        <button class="custom-btn">
             {{ __('Добавить') }}
         </button>
     </div>

@@ -22,7 +22,7 @@
 
     </div>
     <div class="major__content-pharmacies-actions">
-        <button class="major__content-btn edit btn">
+        <button class="major__content-btn edit custom-btn">
             Редактирвать организацию
             <input id="action" type="hidden" name="action">
             <input id="page" type="hidden" name="page" value="organizations">
@@ -40,7 +40,7 @@
     <div class="major__content-pharmacies-search">
         <input class="input" id='search' type="text" placeholder="Search">
         <input class="input" id="action" type="hidden" name="action" value="search">
-        <button class="btn">
+        <button class="custom-btn">
             Поиск
         </button>
     </div>
@@ -74,9 +74,9 @@
                 <td class="name"> {{ $pharmacy->name }} </td>
                 <td class="address"> {{ $pharmacy->address }} </td>
                 <td>
-                    <button class="btn map">Карта</button>
-                    <button class="btn edit" id="{{ $pharmacy->id }}">Редактирвать</button>
-                    <button class="btn remove" id="{{ $pharmacy->id }}">Удалить
+                    <button class="custom-btn map">Карта</button>
+                    <button class="custom-btn edit" id="{{ $pharmacy->id }}">Редактирвать</button>
+                    <button class="custom-btn remove" id="{{ $pharmacy->id }}">Удалить
                         <input id="action" type="hidden" name="action" value="remove">
                         <input id="page" type="hidden" name="page" value="organizations">
                     </button>

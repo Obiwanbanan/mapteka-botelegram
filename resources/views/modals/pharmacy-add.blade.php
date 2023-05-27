@@ -19,7 +19,7 @@
         <input class="input" id="pharmacy-coordinate_Y" type="text" name="coordinate_Y"
                placeholder="Широта">
 
-        <button class="btn">
+        <button class="custom-btn">
             {{ __('Добавить') }}
         </button>
     </div>

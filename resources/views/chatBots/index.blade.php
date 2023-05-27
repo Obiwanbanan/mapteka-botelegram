@@ -30,17 +30,17 @@
                 </select>
             </div>
             <div class="chatbots__add">
-                <button class="btn">
+                <button class="custom-btn">
                     Добавить
                 </button>
             </div>
             <div class="chatbots__edit">
-                <button class="btn">
+                <button class="custom-btn">
                     Редактирвать
                 </button>
             </div>
             <div class="chatbots__remove">
-                <button class="btn">
+                <button class="custom-btn">
                     Удалить
                 </button>
             </div>

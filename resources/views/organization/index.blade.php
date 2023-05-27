@@ -6,7 +6,7 @@
         <h1>
             Организации
         </h1>
-        <a href="/organization/add" class="major__content-btn btn">
+        <a href="/organization/add" class="major__content-btn custom-btn">
             Добавить организацию
         </a>
     </div>
@@ -14,7 +14,7 @@
         <div class="major__content-organization-search">
             <input class="input" id='search' type="text" placeholder="Введите имя или инн">
             <input class="input" id="action" type="hidden" name="action" value="search">
-            <button class="btn">
+            <button class="custom-btn">
                 Поиск
             </button>
         </div>
@@ -34,9 +34,9 @@
                         </div>
                         <div class="major__content-organization-body">
                             @if(!empty($organization->name))
-                                <div class="major__content-organization-name">
+                                <p class="major__content-organization-name">
                                     {{ $organization->name }}
-                                </div>
+                                </p>
                             @endif
 
                             <div class="major__content-organization-wrapper">
@@ -61,9 +61,10 @@
                         </svg>
                     </div>
                 </a>
-
             @endif
         @endforeach
+
+
 {{--        <div class="major__content-organization-pagination">--}}
 {{--                    <div class="prev-page"--}}
 {{--                         data-prev-page= {{ substr($organizations->previousPageUrl(), strpos($organizations->previousPageUrl(), '=') + 1, strlen($organizations->previousPageUrl()))  }}--}}
@@ -108,7 +109,8 @@
             //
             //        );
         @endphp
-{{--            {{ $organizations->links() }}--}}
     </div>
+    {{ $organizations->onEachSide(2)->withQueryString()->links('pagination.custom') }}
+
 
 @endsection

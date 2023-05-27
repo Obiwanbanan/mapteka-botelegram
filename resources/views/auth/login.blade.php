@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn">
+                <button type="submit" class="custom-btn">
                     {{ __('Вход') }}
                 </button>
             </form>

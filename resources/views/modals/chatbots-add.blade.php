@@ -16,7 +16,7 @@
         <input class="input" id="token" type="text" name="token" placeholder="Токен">
         <input class="input" id="url" type="text" name="url" placeholder="Url вебхук">
 
-        <button class="btn">
+        <button class="custom-btn">
             {{ __('Добавить') }}
         </button>
     </div>

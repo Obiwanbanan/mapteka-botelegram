@@ -15,8 +15,7 @@ class OrganizationsController extends Controller
     public function index(): string
     {
         return view('organization/index', [
-            'chatBots' => Bot::all(),
-            'organizations' => Organization::all()
+            'organizations' => Organization::paginate(6)
         ]);
     }
 

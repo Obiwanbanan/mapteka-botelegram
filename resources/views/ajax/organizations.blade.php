@@ -2,7 +2,7 @@
     <h1>
         Организации
     </h1>
-    <button class="major__content-btn btn">
+    <button class="major__content-btn custom-btn">
         Добавить организацию
     </button>
 </div>
@@ -10,7 +10,7 @@
     <div class="major__content-organization-search">
         <input class="input" id='search' type="text" placeholder="Введите имя или инн">
         <input class="input" id="action" type="hidden" name="action" value="search">
-        <button class="btn">
+        <button class="custom-btn">
             Поиск
         </button>
     </div>
