@@ -1,4 +1,3 @@
-import {choiceBot} from "./chatbots-choice";
 import {removeBot} from "./chatbots-remove";
 
 export function editBot() {

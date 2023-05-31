@@ -51,4 +51,7 @@
 //
 
 import "./chatbots/chatbots-choice";
+import "./chatbots/chatbots-modal";
+import "./chatbots/chatbots-add";
+
 

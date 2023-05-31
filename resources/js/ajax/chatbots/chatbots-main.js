@@ -1,5 +1,4 @@
-import {choiceBot} from "./chatbots-choice";
-import {addBotModal} from "./chatbots-add-modal";
+import {addBotModal} from "./chatbots-modal";
 import {addBot} from "./chatbots-add";
 import {editBot} from "./chatbots-edit";
 import {removeBot} from "./chatbots-remove";

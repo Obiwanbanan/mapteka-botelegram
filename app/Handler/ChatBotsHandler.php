@@ -21,10 +21,11 @@ class ChatBotsHandler
         $this->remove($action, $request);
 
         $choiceBot = $this->choiceBot($action, $request);
+
         $chatBots = $this->getAllBots();
         return response()->json([
             'status' => true,
-            'html' => view('ajax/' . $page, compact('chatBots', 'choiceBot'))->render(),
+            'html' => view('ajax/chatbots', compact('chatBots', 'choiceBot'))->render(),
         ]);
     }
 
@@ -97,9 +98,11 @@ class ChatBotsHandler
         if ($action === 'choice') {
             $botId = $request->input('botId');
             return Bot::where('id', $botId)->get()->first();
+        } else {
+            $bots = Bot::all();
+            return $bots[0] ?? null;
         }
 
-        return null;
     }
 
     /**

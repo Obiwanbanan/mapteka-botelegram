@@ -28,6 +28,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 25;
+    height: max-content;
 
     &.active-modal {
         display: block;
