@@ -3,62 +3,49 @@
 namespace App\Handler;
 
 use App\Models\Bot;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
-use Illuminate\Validation\Rule;
 use Telegram\Bot\Api;
-use Telegram\Bot\Exceptions\TelegramSDKException;
 
 class ChatBotsHandler
 {
-    public function __invoke($request): JsonResponse
-    {
-        $action = $request->input('action') ?? '';
-        $page = $request->input('page');
-
-        $this->add($action, $request);
-        $this->update($action, $request);
-        $this->remove($action, $request);
-
-        $choiceBot = $this->choiceBot($action, $request);
-
-        $chatBots = $this->getAllBots();
-        return response()->json([
-            'status' => true,
-            'html' => view('ajax/chatbots', compact('chatBots', 'choiceBot'))->render(),
-        ]);
-    }
-
-    private function add(
-        string $action,
+    public function add(
         object $request
-    ): void
-    {
-        if ($action === 'add') {
-            $request->validate([
-                'name' => 'required|max:55|min:2',
-                'token' => Rule::unique('bots'),
-                'url' => 'required|max:255|min:3',
-            ]);
-            $status = $this->setWebhook($request);
-            $newBot = new Bot();
+    ): array {
+        $validated = $this->validated($request);
 
+        if (!$validated['status']) {
+            return $validated;
+        }
+
+        try {
+            $newBot = new Bot();
             $newBot->name = $request->input('name');
             $newBot->token = $request->input('token');
             $newBot->url = $request->input('url');
-            $newBot->webhook = $status;
-
+            $newBot->webhook = $this->setWebhook($request);
             $newBot->save();
+
+            return [
+                'status' => true,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'что-то пошло не так!',
+            ];
         }
     }
 
-    private function update(
-        string $action,
+    public function update(
         object $request,
-    ): void
-    {
-        if ($action === 'update') {
-            $id = $request->input('botId');
+    ): array {
+        $validated = $this->validated($request);
+
+        if (!$validated['status']) {
+            return $validated;
+        }
+
+        try {
+            $id = $request->input('id');
             $status = $this->setWebhook($request);
 
             Bot::where('id', $id)
@@ -70,56 +57,76 @@ class ChatBotsHandler
                         'url' => $request->input('url'),
                     ]
                 );
+
+            return [
+                'status' => true,
+                'message' => 'Чат бот успешно отредактирован',
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'что-то пошло не так!',
+            ];
         }
     }
 
-    private function remove(
-        string $action,
+    public function remove(
         object $request
-    ): void
-    {
-        if ($action === 'remove') {
-            $id = $request->input('botId');
+    ): array {
+        try {
+            $id = $request->input('id');
             Bot::where('id', $id)->delete();
 
+            return [
+                'status' => true,
+                'message' => 'Бот успешно удалён!',
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'что-то пошло не так!',
+            ];
         }
     }
 
-    private function getAllBots(): Collection
-    {
-        return Bot::all();
-    }
-
-    private function choiceBot(
-        string $action,
-        object $request
-    ): object|null
-    {
-        if ($action === 'choice') {
-            $botId = $request->input('botId');
-            return Bot::where('id', $botId)->get()->first();
-        } else {
-            $bots = Bot::all();
-            return $bots[0] ?? null;
-        }
-
-    }
-
-    /**
-     * @throws TelegramSDKException
-     */
     private function setWebhook(
         object $request
-    ): bool
-    {
+    ): bool {
         try {
             $url = $request->input('url');
             $botToken = $request->input('token');
             $telegram = new Api($botToken);
             return $telegram->setWebhook(['url' => $url . '/' . $botToken . '/' . 'webhook']);
         } catch (\Exception $exception) {
-
             return false;
         }
+    }
+
+    private function validated(object $request): array
+    {
+        if (empty($request->input('name'))) {
+            return [
+                'status' => false,
+                'message' => 'Имя не может быть пустым!'
+            ];
+        }
+
+        if (empty($request->input('token'))) {
+            return [
+                'status' => false,
+                'message' => 'Токен не может быть пустым!'
+            ];
+        }
+
+        if (empty($request->input('url'))) {
+            return [
+                'status' => false,
+                'message' => 'Url вебхука не может быть пустым!'
+            ];
+        }
+
+        return [
+            'status' => true,
+        ];
     }
 }

@@ -33,9 +33,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('chat-bots')->group(function () {
         Route::get('/', [ChatBotsController::class, 'index'])->name('chat-bots');
-        Route::get('/add', [ChatBotsController::class, 'chatBots'])->name('chat-bots-add');
-        Route::get('/edit/{id}', [ChatBotsController::class, 'chatBots'])->name('chat-bots-edit');
-        Route::post('/delete/{id}', [ChatBotsController::class, 'chatBots'])->name('chat-bots-delete');
+        Route::match(['GET', 'POST'],'/add', [ChatBotsController::class, 'add'])->name('chat-bots-add');
+        Route::post('/update', [ChatBotsController::class, 'update'])->name('chat-bots-update');
+        Route::delete('/remove', [ChatBotsController::class, 'remove'])->name('chat-bots-remove');
     });
 
     Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');

@@ -9,7 +9,7 @@
     <div class="major__content-container">
         <div class="chatbots__header">
             <div class="chatbots__choice">
-                <select>
+                <select id="select-chatbots">
                     @if(!$choiceBot)
                         <option>
                             Не выбран
@@ -18,7 +18,7 @@
 
                     @foreach($chatBots as $chatBot)
                         <option
-                            id="{{ $chatBot->id }}"
+                            data-id="{{ $chatBot->id }}"
                             data-name="{{ $chatBot->name }}"
                             data-token="{{ $chatBot->token }}"
                             data-webhook="{{ $chatBot->webhook }}"
@@ -29,18 +29,18 @@
                     @endforeach
                 </select>
             </div>
-            <div class="chatbots__add">
-                <button class="custom-btn">
+            <a href="/chat-bots/add" class="chatbots__add">
+                <button type="button" class="custom-btn">
                     Добавить
                 </button>
-            </div>
+            </a>
             <div class="chatbots__edit">
-                <button class="custom-btn">
+                <button type="button" class="custom-btn">
                     Редактирвать
                 </button>
             </div>
             <div class="chatbots__remove">
-                <button class="custom-btn">
+                <button type="button" class="custom-btn">
                     Удалить
                 </button>
             </div>
@@ -51,19 +51,24 @@
                     $status = $choiceBot->webhook ? 'Активный' : 'Неактивный'
                 @endphp
                 <div class="chatbots__body-wrapper">
-                    <div class="chatbots__fields">
-                        <input class="input" id="name" type="text" name="name" placeholder="Name"
-                               value="{{ $choiceBot->name }}"
-                               disabled>
-                        <input class="input" id="token" type="text" name="token" placeholder="Token"
-                               value="{{ $choiceBot->token }}"
-                               disabled>
-                        <input class="input" id="url" type="text" name="url" placeholder="Url webhook"
-                               value="{{ $choiceBot->url }}"
-                               disabled>
-                    </div>
+                    <form>
+                        <div class="chatbots__fields">
+                            <input class="input" id="name" type="text" name="name" placeholder="Name"
+                                   value="{{ $choiceBot->name }}"
+                                   disabled>
+                            <input class="input" id="token" type="text" name="token" placeholder="Token"
+                                   value="{{ $choiceBot->token }}"
+                                   disabled>
+                            <input class="input" id="url" type="text" name="url" placeholder="Url webhook"
+                                   value="{{ $choiceBot->url }}"
+                                   disabled>
+                            <input class="input" id="id" type="text" name="id"
+                                   value="{{ $choiceBot->id }}"
+                                   hidden>
+                        </div>
+                    </form>
                     <div class="chatbots__status">
-                        Webhook: <span> {{ $status }}</span>
+                        Webhook: <span class="@if($status === 'Неактивный') deactivate @else active @endif"> {{ $status }}</span>
                     </div>
                 </div>
 
@@ -86,6 +91,4 @@
             @endif
         </div>
     </div>
-
-    @include('modals.chatbots-add')
 @endsection
