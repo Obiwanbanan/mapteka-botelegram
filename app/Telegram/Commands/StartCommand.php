@@ -4,26 +4,28 @@ namespace App\Telegram\Commands;
 
 use App\Telegram\Keyboard\TelegramKeyboard;
 use Illuminate\Support\Facades\Log;
-use Telegram\Bot\Commands\Command;
+use Telegram\Bot\Api;
 use Telegram\Bot\Exceptions\TelegramResponseException;
-use Telegram\Bot\Keyboard\Keyboard;
 
-class StartCommand extends Command
+class StartCommand
 {
-    protected string $name = 'start';
-    protected string $description = 'Команда для старта';
+    private ?Api $telegram = null;
+    private ?string $chatId = null;
 
-    public function handle(): void
+    public function __construct(
+        Api $telegram,
+        string $chatId
+    )
     {
-        $update = $this->getUpdate();
-        $chatId = $update->getChat()['id'] ?? '';
-        $user = $update->getMessage()->getFrom();
-        $username = $user->getFirstName() . ' ' . $user->getLastName();
-        $telegram = $this->getTelegram();
+        $this->telegram = $telegram;
+        $this->chatId = $chatId;
+    }
+    public function start(): void
+    {
         try {
-            $telegram->sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'Привет, ' . $username,
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chatId,
+                'text' => 'Привет',
                 'reply_markup' => TelegramKeyboard::mainMenu()
             ]);
         } catch (TelegramResponseException $e) {

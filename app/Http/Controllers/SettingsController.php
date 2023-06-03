@@ -2,24 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Handler\SettingsHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-
+use Illuminate\View\View;
 
 class SettingsController extends Controller
 {
-
-//    public function settings(
-//        Request         $request,
-//        SettingsHandler $handler
-//    ): JsonResponse
-//    {
-//        return $handler($request);
-//    }
-
-    public function settings()
+    public function index(): View
     {
-        return view('settings/settings');
+        return view('settings/index');
     }
 }

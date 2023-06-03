@@ -8,4 +8,5 @@
     <div class="major__content-container">
 
     </div>
+
 @endsection
