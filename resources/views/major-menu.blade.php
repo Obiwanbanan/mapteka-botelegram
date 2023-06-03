@@ -76,8 +76,6 @@
                             Выйти
                         </span>
                         </button>
-
-
                     </form>
                 </div>
                 <div class="major__content">
