@@ -30,4 +30,5 @@
             {{ __('Добавить') }}
         </button>
     </div>
+
 @endsection
