@@ -28,8 +28,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 //    Route::post('/menu', [MenuController::class, 'menu'])->name('menu');
 //    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
-//    Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
-//    Route::post('/chatBots', [ChatBotsController::class, 'index'])->name('chatBots');
 
     Route::prefix('chat-bots')->group(function () {
         Route::get('/', [ChatBotsController::class, 'index'])->name('chat-bots');
@@ -38,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/remove', [ChatBotsController::class, 'remove'])->name('chat-bots-remove');
     });
 
-    Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
     Route::prefix('organization')->group(function () {
         Route::get('/', [OrganizationsController::class, 'index'])->name('organization');
         Route::get('/add', [OrganizationsController::class, 'add'])->name('organization.add');
