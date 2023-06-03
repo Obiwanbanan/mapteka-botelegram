@@ -1,17 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChatBotsController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\PharmaciesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TelegramBotsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Telegram\Bot\Api;
-use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +22,6 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-//    Route::post('/menu', [MenuController::class, 'menu'])->name('menu');
-//    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
 
     Route::prefix('chat-bots')->group(function () {
         Route::get('/', [ChatBotsController::class, 'index'])->name('chat-bots');
