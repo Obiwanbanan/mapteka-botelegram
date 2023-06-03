@@ -1,5 +1,5 @@
 <div class="header">
-        <a href="{{ Route('dashboard') }}">
+        <a href="{{ Route('home') }}">
             Mapteka botelegram
         </a>
 </div>
