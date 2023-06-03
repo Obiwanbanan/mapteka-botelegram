@@ -5,7 +5,10 @@
  */
 
 import './bootstrap';
-import './ajax/major-content'
+window.csrf = document.querySelector('meta[name="_token"]').content;
+import './chat-bots/chat-bots';
+import './ajax/main'
+import './ajax/organization/organization-search'
 import { createApp } from 'vue';
 
 /**

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChatBotsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\PharmaciesController;
@@ -23,11 +25,29 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', [OrganizationsController::class, 'index'])->name('home');
-    Route::post('/menu', [MenuController::class, 'menu'])->name('menu');
-    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
-    Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
-    Route::post('/chatBots', [ChatBotsController::class, 'chatBots'])->name('chatBots');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+//    Route::post('/menu', [MenuController::class, 'menu'])->name('menu');
+//    Route::post('/organization', [OrganizationsController::class, 'organization'])->name('organization');
+//    Route::post('/settings', [SettingsController::class, 'settings'])->name('settings');
+//    Route::post('/chatBots', [ChatBotsController::class, 'index'])->name('chatBots');
+
+    Route::prefix('chat-bots')->group(function () {
+        Route::get('/', [ChatBotsController::class, 'index'])->name('chat-bots');
+        Route::match(['GET', 'POST'],'/add', [ChatBotsController::class, 'add'])->name('chat-bots-add');
+        Route::post('/update', [ChatBotsController::class, 'update'])->name('chat-bots-update');
+        Route::delete('/remove', [ChatBotsController::class, 'remove'])->name('chat-bots-remove');
+    });
+
+    Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
+    Route::prefix('organization')->group(function () {
+        Route::get('/', [OrganizationsController::class, 'index'])->name('organization');
+        Route::get('/add', [OrganizationsController::class, 'add'])->name('organization.add');
+        Route::get('/{id}/edit', [OrganizationsController::class, 'edit'])->name('organization.edit');
+        Route::delete('/{id}/delete', [OrganizationsController::class, 'delete'])->name('organization.delete');
+        Route::get('/search', [OrganizationsController::class, 'search'])->name('organization.search');
+        Route::get('/{id}/', [OrganizationsController::class, 'show'])->name('organization.show');
+
+    });
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
 });
 

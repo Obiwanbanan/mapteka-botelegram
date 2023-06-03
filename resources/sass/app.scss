@@ -9,11 +9,12 @@
 @import "variable/components";
 
 // Bootstrap
-//@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';
 
 //partials
 @import "partials/footer";
 @import "partials/header";
+@import "partials/pagination";
 
 //modules
 @import "modules/major";

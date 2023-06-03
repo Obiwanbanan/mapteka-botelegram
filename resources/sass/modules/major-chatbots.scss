@@ -67,3 +67,19 @@
 .chatbots__body-wrapper {
     width: 70%;
 }
+
+.chat-bots-add {
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .custom-btn {
+        max-width: max-content;
+    }
+}
+
+.chatbots__choice {
+    width: 300px;
+}

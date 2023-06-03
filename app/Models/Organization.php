@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Organization extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'INN', 'bot_id'];
+    protected $fillable = ['name', 'INN', 'bot_id', 'id'];
 
     public function bot(): BelongsTo
     {

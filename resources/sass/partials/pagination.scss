@@ -1,0 +1,20 @@
+.pagination {
+    justify-content: center;
+    padding-top: 30px;
+
+    .page-item {
+        a {
+            color: $c-main;
+            font-weight: 700;
+        }
+
+    }
+
+    .page-item.active {
+        span {
+            background: $c-main;
+            border: 1px solid $c-main;
+        }
+    }
+
+}

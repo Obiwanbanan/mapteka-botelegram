@@ -23,7 +23,7 @@
             @endforeach
         </select>
 
-        <button id="" class="btn">
+        <button id="" class="custom-btn">
             {{ __('Обновить') }}
         </button>
     </div>
