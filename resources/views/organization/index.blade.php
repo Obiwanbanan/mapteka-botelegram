@@ -23,7 +23,7 @@
     <div class="major__content-organization-container">
         @foreach($organizations as $organization)
             @if(!empty($organization))
-                <a href="/organization/{{ $organization->id }}" class="major__content-organization" id="{{ $organization->id }}">
+                <a href="{{ route('organization-update', ['id' => $organization->id]) }}" class="major__content-organization" id="{{ $organization->id }}">
                     <div class="major__content-organization-left">
                         <div class="major__content-organization-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32"

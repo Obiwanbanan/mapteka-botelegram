@@ -2,103 +2,115 @@
 
 namespace App\Handler\Organization;
 
-use App\Helpers\TextHelper;
-use App\Interface\DataRequestInterface;
-use App\Models\Bot;
 use App\Models\Organization;
 use App\Models\Pharmacies;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
-class OrganizationHandler implements DataRequestInterface
+class OrganizationHandler
 {
-    private ?string $action = null;
-    private ?string $page = null;
-    private ?string $organizationId = null;
-    private ?string $organizationName = null;
-    private ?string $organizationINN = null;
-    private ?string $botId = null;
-    private ?string $search = null;
 
-    public function __invoke(
-        Request $request,
-    ): JsonResponse {
-        $this->setUpDataRequest($request);
 
-        match ($this->action) {
-            TextHelper::ADD => $this->add(),
-            TextHelper::UPDATE => $this->update(),
-            TextHelper::REMOVE => $this->remove(),
-            TextHelper::SEARCH => $organizations = $this->getOrganizationAfterSearch(),
-        };
+//    public function add(): void
+//    {
+//        $organization = new Organization();
+//        $organization->name = $this->organizationName;
+//        $organization->INN = $this->organizationINN;
+//        $organization->bot_id = $this->botId;
+//        $organization->save();
+//    }
 
-        return response()->json([
+    public function update(
+        Request $request
+    ): array
+    {
+        $validated = $this->validated($request);
+
+        if (!$validated['status']) {
+            return $validated;
+        }
+
+        try {
+            Organization::where('id', $request->input('id'))
+                ->update(
+                    [
+                        'name' => $request->input('name'),
+                        'INN' => $request->input('INN'),
+                        'bot_id' => $request->input('botId'),
+                    ]
+                );
+
+            return [
+                'status' => true,
+                'message' => 'Организация успешно отредактирована',
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'Что-то пошло не так!'
+            ];
+        }
+
+    }
+
+    public function remove(
+        Request $request
+    ): array
+    {
+        try {
+            Pharmacies::where('organization_id', $request->input('id'))->delete();
+            Organization::where('id', $request->input('id'))->delete();
+
+            return [
+                'status' => true,
+                'message' => 'Организация успешно отредактирована',
+                'url' => route('organization')
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'Что-то пошло не так!'
+            ];
+        }
+    }
+
+//    private function getOrganizationAfterSearch(): Collection
+//    {
+//        return Organization::where(function ($query) {
+//            $query->where('name', 'LIKE', '%' . $this->search . '%')
+//                ->orWhere('INN', 'LIKE', '%' . $this->search . '%');
+//        })
+//            ->with('bot')
+//            ->get();
+//    }
+
+//    private function getChatBots(): Collection
+//    {
+//        return Bot::all();
+//    }
+
+//    private function getOrganizationWithBot(): Collection
+//    {
+//        return Organization::with('bot')->get();
+//    }
+
+    private function validated(object $request): array
+    {
+        if (empty($request->input('name'))) {
+            return [
+                'status' => false,
+                'message' => 'Имя не может быть пустым!'
+            ];
+        }
+
+        if (empty($request->input('INN'))) {
+            return [
+                'status' => false,
+                'message' => 'Токен не может быть пустым!'
+            ];
+        }
+
+        return [
             'status' => true,
-            'html' => view('ajax/' . $this->page, [
-                $this->page => $this->page,
-                'organizations' => $organizations ?? $this->getOrganizationWithBot(),
-                'chatBots' => $this->getChatBots(),
-            ])->render()
-        ]);
-    }
-
-    public function setUpDataRequest(
-        Request $request,
-    ): void {
-        $this->action = $request->input('action');
-        $this->page = $request->input('page');
-        $this->organizationId = $request->input('organizationId');
-        $this->organizationName = $request->input('organizationName');
-        $this->organizationINN = $request->input('organizationINN');
-        $this->botId = $request->input('botId');
-        $this->search = $request->input('search');
-    }
-
-    public function add(): void
-    {
-        $organization = new Organization();
-        $organization->name = $this->organizationName;
-        $organization->INN = $this->organizationINN;
-        $organization->bot_id = $this->botId;
-        $organization->save();
-    }
-
-    private function update(): void
-    {
-        Organization::where('id', $this->organizationId)
-            ->update(
-                [
-                    'name' => $this->organizationName,
-                    'INN' => $this->organizationINN,
-                    'bot_id' => $this->botId,
-                ]
-            );
-    }
-
-    private function remove(): void
-    {
-        Pharmacies::where('organization_id', $this->organizationId)->delete();
-        Organization::where('id', $this->organizationId)->delete();
-    }
-
-    private function getOrganizationAfterSearch(): Collection
-    {
-        return Organization::where(function ($query) {
-            $query->where('name', 'LIKE', '%' . $this->search . '%')
-                ->orWhere('INN', 'LIKE', '%' . $this->search . '%');
-        })
-            ->with('bot')
-            ->get();
-    }
-
-    private function getChatBots(): Collection
-    {
-        return Bot::all();
-    }
-
-    private function getOrganizationWithBot(): Collection
-    {
-        return Organization::with('bot')->get();
+        ];
     }
 }

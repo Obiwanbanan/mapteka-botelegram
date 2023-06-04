@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Handler\Organization\OrganizationHandler;
-use App\Http\Requests\OrganizationsRequest;
 use App\Models\Bot;
 use App\Models\Organization;
 use App\Models\Pharmacies;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OrganizationsController extends Controller
 {
@@ -20,36 +20,29 @@ class OrganizationsController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function remove(
+        Request $request,
+        OrganizationHandler $organizationHandler,
+    ): JsonResponse|RedirectResponse
     {
+        return response()->json($organizationHandler->remove($request));
+    }
+
+    public function update(
+        $id,
+        Request $request,
+        OrganizationHandler $organizationHandler,
+    ): View|JsonResponse
+    {
+        if ($request->isMethod('post')) {
+           return response()->json($organizationHandler->update($request));
+        }
+
         return view('organization/edit', [
-            'organization' => Organization::where('id', $id)->get()->toArray()[0],
+            'organization' => Organization::find($id),
+            'pharmacies' => Pharmacies::where('organization_id', $id)->get(),
             'chatBots' => Bot::all()
         ]);
-    }
-
-    public function delete($id)
-    {
-        Pharmacies::where('organization_id', $id)->delete();
-        Organization::where('id', $id)->delete();
-
-        return redirect('organization');
-    }
-
-    public function edit($id, OrganizationsRequest $request)
-    {
-
-        Organization::where('id', $id)
-            ->update(
-                [
-                    'name' => $request->input('name'),
-                    'INN' => $request->input('INN'),
-                    'bot_id' => $request->input('botId'),
-                ]
-            );
-
-        return redirect('organization/' .$id)->with('success', 'Организация успешно обновлена!');
-
     }
 
     public function add(
@@ -78,15 +71,4 @@ class OrganizationsController extends Controller
     public function search() {
         dd(1);
     }
-
-
-
-
-
-//    public function organization(
-//        Request $request,
-//        OrganizationHandler $handler
-//    ): JsonResponse {
-//        return $handler($request);
-//    }
 }

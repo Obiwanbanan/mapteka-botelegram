@@ -11,6 +11,7 @@
     border-radius: 5px;
     transition: $transition-btn;
     border: 1px solid $c-light-gray;
+    height: max-content;
 
     &:hover {
         background-color: $c-light-green2;
