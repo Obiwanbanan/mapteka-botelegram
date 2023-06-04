@@ -9,7 +9,6 @@ window.csrf = document.querySelector('meta[name="_token"]').content;
 import './chat-bots/chat-bots';
 import './organization/organization';
 import './ajax/main'
-import './ajax/organization/organization-search'
 import { createApp } from 'vue';
 
 /**

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Handler\Organization\OrganizationHandler;
+use App\Handler\OrganizationHandler;
 use App\Models\Bot;
 use App\Models\Organization;
 use App\Models\Pharmacies;
+use App\Service\Pagination;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,10 +14,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OrganizationsController extends Controller
 {
-    public function index(): View
-    {
+    public function index(
+        Pagination $pagination,
+    ): View {
+        $dataPagination = $pagination->paginationWithParam(Organization::class);
+
         return view('organization/index', [
-            'organizations' => Organization::paginate(6)
+            'organizations' => $dataPagination['result'],
+            'totalPage' => $dataPagination['totalPage'],
+            'page' => $dataPagination['page'],
+            'total' => $dataPagination['total'],
         ]);
     }
 
@@ -68,7 +75,28 @@ class OrganizationsController extends Controller
         ]);
     }
 
-    public function search() {
-        dd(1);
+    public function paginationWithParam(
+        Request    $request,
+        Pagination $pagination,
+    ): JsonResponse {
+        $dataPagination = $pagination->paginationWithParam(
+            Organization::class,
+            $request->get('page'),
+            6,
+            [
+                'search' => $request->get('search')
+            ]
+        );
+
+        $result = view('organization/pagination', [
+            'organizations' => $dataPagination['result'],
+            'totalPage' => $dataPagination['totalPage'],
+            'page' => $dataPagination['page'],
+            'total' => $dataPagination['total'],
+        ]);
+
+        return response()->json([
+            'result' => $result->render(),
+        ]);
     }
 }

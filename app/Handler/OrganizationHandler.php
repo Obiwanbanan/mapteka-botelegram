@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Handler\Organization;
+namespace App\Handler;
 
 use App\Models\Organization;
 use App\Models\Pharmacies;

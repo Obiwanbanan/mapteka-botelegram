@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/add', [OrganizationsController::class, 'add'])->name('organization.add');
         Route::match(['GET', 'POST'],'/{id}/update', [OrganizationsController::class, 'update'])->name('organization-update');
         Route::delete('/remove', [OrganizationsController::class, 'remove'])->name('organization-remove');
-        Route::get('/search', [OrganizationsController::class, 'search'])->name('organization-search');
+        Route::post('/pagination-with-param', [OrganizationsController::class, 'paginationWithParam'])->name('organization-pagination-with-param');
 
     });
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
