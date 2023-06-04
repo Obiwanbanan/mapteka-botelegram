@@ -6,7 +6,7 @@
 
         @if($page - 2 > 0)
             <li class="page-item">
-                <span type="button" class="page-link">1</span>
+                <span class="page-link">1</span>
             </li>
         @endif
 
@@ -16,17 +16,17 @@
 
         @if($page - 1 <= $totalPage && $page != 1)
             <li class="page-item">
-                <span type="button" class="page-link">{{ $page - 1 }}</span>
+                <span class="page-link">{{ $page - 1 }}</span>
             </li>
         @endif
 
         <li class="page-item active">
-            <span type="button" class="page-link">{{ $page }}</span>
+            <span class="page-link">{{ $page }}</span>
         </li>
 
         @if($page + 1 < $totalPage)
             <li class="page-item">
-                <span type="button" class="page-link">{{ $page + 1 }}</span>
+                <span class="page-link">{{ $page + 1 }}</span>
             </li>
         @endif
 
@@ -36,7 +36,7 @@
 
         @if($page < $totalPage)
             <li class="page-item">
-                <span type="button" class="page-link">{{ $totalPage }}</span>
+                <span class="page-link">{{ $totalPage }}</span>
             </li>
         @endif
 

@@ -150,4 +150,19 @@
             font-weight: 700;
         }
     }
+
+    .pagination {
+        .page-item {
+            .page-link {
+                color: $c-main;
+                cursor: pointer;
+            }
+            &.active {
+                .page-link {
+                    color: $c-white;
+                }
+            }
+        }
+    }
+
 }
