@@ -55,7 +55,7 @@ class OrganizationHandler implements DataRequestInterface
         $this->search = $request->input('search');
     }
 
-    private function add(): void
+    public function add(): void
     {
         $organization = new Organization();
         $organization->name = $this->organizationName;

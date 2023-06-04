@@ -7,12 +7,13 @@ use App\Http\Requests\OrganizationsRequest;
 use App\Models\Bot;
 use App\Models\Organization;
 use App\Models\Pharmacies;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class OrganizationsController extends Controller
 {
-    public function index(): string
+    public function index(): View
     {
         return view('organization/index', [
             'organizations' => Organization::paginate(6)
@@ -51,8 +52,24 @@ class OrganizationsController extends Controller
 
     }
 
-    public function add(): string
+    public function add(
+        Request $request,
+        OrganizationHandler $organizationHandler,
+    ): View|JsonResponse
     {
+        if ($request->isMethod('post')) {
+            $handelAdd = $organizationHandler->add($request);
+
+            if (!$handelAdd['status']) {
+                return response()->json($handelAdd);
+            }
+
+            return response()->json([
+                'status' => true,
+                'url' => route('chat-bots'),
+            ]);
+        }
+
         return view('organization/add', [
             'chatBots' => Bot::all()
         ]);
