@@ -40,7 +40,6 @@ class Pharmacy {
         const removeButtons = document.querySelectorAll('.major__content-pharmacies .remove');
         removeButtons && removeButtons.forEach((removeButton) => {
             removeButton && removeButton.addEventListener('click', async () => {
-
                 const response = await fetch(`/pharmacies/remove`, {
                     method: 'DELETE',
                     headers: {
@@ -69,11 +68,8 @@ class Pharmacy {
                     message: resp.message,
                     position: 'topRight',
                 });
-
             })
         })
-
-
     }
 }
 
