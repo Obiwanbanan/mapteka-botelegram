@@ -62,7 +62,8 @@
                 Поиск
             </button>
         </div>
-        <a href="{{ route('pharmacy-add') }}?ograhization-id={{ $organization->id }}" class="major__content-btn add custom-btn ">
+        <a href="{{ route('pharmacy-add') }}?ograhization-id={{ $organization->id }}"
+           class="major__content-btn add custom-btn ">
             Добавить аптеку
         </a>
     </div>
@@ -92,7 +93,7 @@
                     <td class="name"> {{ $pharmacy->name }} </td>
                     <td class="address"> {{ $pharmacy->address }} </td>
                     <td>
-                        <button class="custom-btn map">Карта</button>
+                        <a href="{{ $pharmacy->map_url }}" class="custom-btn map">Карта</a>
                         <button class="custom-btn edit" id="{{ $pharmacy->id }}">Редактирвать</button>
                         <button class="custom-btn remove" id="{{ $pharmacy->id }}">Удалить
                             <input id="action" type="hidden" name="action" value="remove">
