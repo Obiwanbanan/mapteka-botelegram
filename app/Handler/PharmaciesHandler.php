@@ -35,12 +35,11 @@ class PharmaciesHandler
         ]);
     }
 
-    private function add(
-         string $action,
+    public function add(
          object $request
-    ): void
+    ): array
     {
-        if ($action === 'add') {
+        try {
             $newPharmacy = new Pharmacies();
 
             $newPharmacy->name = $request->input('name');
@@ -50,7 +49,19 @@ class PharmaciesHandler
             $newPharmacy->organization_id = $request->input('organizationId');
 
             $newPharmacy->save();
+
+            return [
+                'status' => true,
+                'url' => route('organization/' . $request->input('organizationId')) . '/update',
+            ];
+        } catch (\Exception $e) {
+
+            return [
+                'status' => false,
+                'message' => 'что-то пошло не так!',
+            ];
         }
+
     }
 
 

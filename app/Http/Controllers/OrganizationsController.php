@@ -58,16 +58,7 @@ class OrganizationsController extends Controller
     ): View|JsonResponse
     {
         if ($request->isMethod('post')) {
-            $handelAdd = $organizationHandler->add($request);
-
-            if (!$handelAdd['status']) {
-                return response()->json($handelAdd);
-            }
-
-            return response()->json([
-                'status' => true,
-                'url' => route('chat-bots'),
-            ]);
+            return response()->json($organizationHandler->add($request));
         }
 
         return view('organization/add', [

@@ -8,6 +8,7 @@ class Organization {
     }
 
     init() {
+        this.add()
         this.edit()
         this.remove()
         this.pagination()
@@ -59,6 +60,33 @@ class Organization {
         })
     }
 
+    add() {
+        const addButton = document.querySelector('.major__organization-add button');
+
+        addButton && addButton.addEventListener('click', async () => {
+            const formData = new FormData(document.querySelector('.major__organization-add form'));
+
+            const response = await fetch(`/organization/add`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': window.csrf
+                },
+                body: formData,
+            });
+            const resp = await response.json();
+
+            if (!resp.status) {
+                iziToast.error({
+                    message: resp.message,
+                    position: 'topRight',
+                });
+
+                return;
+            }
+
+            window.location.href = resp.url;
+        })
+    }
     search() {
         this.searchInput && this.searchInput.addEventListener('input', () => {
             clearTimeout(this.timer);

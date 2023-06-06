@@ -33,12 +33,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
     Route::prefix('organization')->group(function () {
         Route::get('/', [OrganizationsController::class, 'index'])->name('organization');
-        Route::get('/add', [OrganizationsController::class, 'add'])->name('organization.add');
+        Route::match(['GET', 'POST'],'/add', [OrganizationsController::class, 'add'])->name('organization-add');
         Route::match(['GET', 'POST'],'/{id}/update', [OrganizationsController::class, 'update'])->name('organization-update');
         Route::delete('/remove', [OrganizationsController::class, 'remove'])->name('organization-remove');
         Route::post('/pagination-with-param', [OrganizationsController::class, 'paginationWithParam'])->name('organization-pagination-with-param');
-
+        Route::get('/search', [OrganizationsController::class, 'search'])->name('organization-search');
     });
+
+    Route::prefix('pharmacies')->group(function () {
+        Route::get('/', [PharmaciesController::class, 'index'])->name('pharmacies');
+        Route::match(['GET', 'POST'],'/add', [PharmaciesController::class, 'add'])->name('pharmacy-add');
+        Route::match(['GET', 'POST'],'/{id}/update', [PharmaciesController::class, 'update'])->name('pharmacy-update');
+        Route::delete('/remove', [PharmaciesController::class, 'remove'])->name('pharmacy-remove');
+        Route::get('/search', [PharmaciesController::class, 'search'])->name('pharmacy-search');
+    });
+
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
 });
 

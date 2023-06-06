@@ -6,7 +6,7 @@
         <h1>
             Организации
         </h1>
-        <a href="/organization/add" class="major__content-btn custom-btn">
+        <a href="{{ route('organization-add') }}" class="major__content-btn custom-btn">
             Добавить организацию
         </a>
     </div>

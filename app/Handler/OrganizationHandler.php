@@ -5,19 +5,32 @@ namespace App\Handler;
 use App\Models\Organization;
 use App\Models\Pharmacies;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 
 class OrganizationHandler
 {
+    public function add(Request $request): array
+    {
 
+        try {
+            $organization = new Organization();
+            $organization->name = $request->input('name');
+            $organization->INN = $request->input('INN');
+            $organization->bot_id = $request->input('botId');
+            $organization->save();
 
-//    public function add(): void
-//    {
-//        $organization = new Organization();
-//        $organization->name = $this->organizationName;
-//        $organization->INN = $this->organizationINN;
-//        $organization->bot_id = $this->botId;
-//        $organization->save();
-//    }
+            return [
+                'status' => true,
+                'message' => 'Организация успешно добавлена',
+                'url' => route('organization')
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'Что-то пошло не так!'
+            ];
+        }
+    }
 
     public function update(
         Request $request

@@ -58,9 +58,9 @@
                 Поиск
             </button>
         </div>
-        <button class="major__content-btn add custom-btn ">
+        <a href="{{ route('pharmacy-add') }}?ograhization-id={{ $organization->id }}" class="major__content-btn add custom-btn ">
             Добавить аптеку
-        </button>
+        </a>
     </div>
     <div class="major__content-pharmacies">
         <table>
