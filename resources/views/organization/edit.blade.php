@@ -36,14 +36,18 @@
                             </option>
                         @endforeach
                     </select>
-                    <button type="button" class="custom-btn">
-                        Обновить организацию
-                    </button>
+                    <div class="major__organization-edit-form-buttons">
+                        <button type="button" class="custom-btn">
+                            Обновить организацию
+                        </button>
+                        <button id="major__organization-remove" type="button" class="custom-btn">
+                            Удалить организацию
+                        </button>
+                    </div>
+
                 </form>
 
-                <button id="major__organization-remove" type="button" class="custom-btn">
-                    Удалить организацию
-                </button>
+
             </div>
         </div>
     </div>

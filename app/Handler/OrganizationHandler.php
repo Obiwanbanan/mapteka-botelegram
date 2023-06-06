@@ -75,7 +75,7 @@ class OrganizationHandler
 
             return [
                 'status' => true,
-                'message' => 'Организация успешно отредактирована',
+                'message' => 'Организация успешно удалена',
                 'url' => route('organization')
             ];
         } catch (\Exception $e) {

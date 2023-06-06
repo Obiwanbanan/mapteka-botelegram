@@ -59,4 +59,12 @@ class PharmaciesController extends Controller
             'cities'=> City::select('id', 'name')->get(),
         ]);
     }
+
+    public function remove(
+        Request $request,
+        PharmaciesHandler $pharmaciesHandler,
+    ): JsonResponse
+    {
+        return response()->json($pharmaciesHandler->remove($request));
+    }
 }

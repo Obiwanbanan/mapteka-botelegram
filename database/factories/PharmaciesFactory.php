@@ -20,8 +20,8 @@ class PharmaciesFactory extends Factory
             'organization_id' => fake()->numberBetween(1, 10),
             'name' => fake()->word(),
             'address' => fake()->streetAddress(),
-            'latitude' => 55.753215,
-            'longitude' => 37.622504,
+            'city_id' => fake()->numberBetween(1, 1000),
+            'map_url' => fake()->url()
         ];
     }
 }

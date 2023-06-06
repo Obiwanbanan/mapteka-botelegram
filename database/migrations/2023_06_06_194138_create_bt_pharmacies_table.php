@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('organization_id');
             $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->unsignedBigInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->string('name');
             $table->string('address');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('map_url');
             $table->timestamps();
         });
 
