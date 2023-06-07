@@ -74,9 +74,12 @@ class PharmaciesController extends Controller
         Request    $request,
         Pagination $pagination,
     ): JsonResponse {
+        $organizationId = $request->get('organizationId');
+        $search = $request->get('search');
+
         $result = view('pharmacy/pagination', $pagination->paginationWithParam(
             null,
-            Pharmacies::getSearchPharmaciesQuery($request->get('search')),
+            Pharmacies::getSearchPharmaciesByOrganizationQuery($organizationId, $search),
             $request->get('page'),
         ));
 

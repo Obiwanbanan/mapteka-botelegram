@@ -34,7 +34,7 @@ class Organization {
     }
 
     pagination() {
-        const paginationItem = document.querySelectorAll('.pagination .page-item')
+        const paginationItem = document.querySelectorAll('.organization-cards-wrapper .pagination .page-item')
 
         paginationItem && paginationItem.forEach((item) => {
             item.addEventListener('click', async () => {

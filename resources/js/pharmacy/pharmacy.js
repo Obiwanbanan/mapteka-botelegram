@@ -1,13 +1,19 @@
 class Pharmacy {
     constructor() {
+        this.cardsWrapper = document.querySelector('.pharmacy-cards-wrapper');
+        this.searchInput = document.querySelector('.major__content-pharmacies-search #search');
+        this.organizationId = this.searchInput?.dataset.organizationId;
+        this.page = 1;
+
         this.init();
     }
 
     init() {
         this.add()
         this.remove()
+        this.pagination()
+        this.search()
     }
-
 
     add() {
         const addButton = document.querySelector('.major__pharmacy-add button');
@@ -70,6 +76,64 @@ class Pharmacy {
                 });
             })
         })
+    }
+
+    async ajaxPaginationWithParam() {
+        console.log(window.csrf)
+        const response = await fetch(`/pharmacies/pagination-with-param`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': window.csrf,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                page: this.page,
+                search: this.searchInput.value,
+                organizationId: this.organizationId
+            })
+        });
+        const resp = await response.json();
+
+        this.cardsWrapper.innerHTML = resp.result;
+    }
+
+    pagination() {
+        const paginationItem = document.querySelectorAll('.pharmacy-cards-wrapper .pagination .page-item')
+
+        paginationItem && paginationItem.forEach((item) => {
+            item.addEventListener('click', async () => {
+                if (item.classList.contains('disabled')) {
+                    return;
+                }
+
+                if (item.classList.contains('prev')) {
+                    this.page = this.page - 1;
+                }
+
+                if (item.classList.contains('next')) {
+                    this.page = this.page + 1;
+                }
+
+                if (!item.classList.contains('next') && !item.classList.contains('prev') && !item.classList.contains('dots')) {
+                    this.page = Number(item.textContent.trim());
+                }
+
+                await this.ajaxPaginationWithParam()
+                this.pagination();
+            })
+        })
+    }
+
+    search() {
+        this.searchInput && this.searchInput.addEventListener('input', () => {
+            clearTimeout(this.timer);
+
+            this.timer = setTimeout(async () => {
+                await this.ajaxPaginationWithParam();
+                this.pagination()
+            }, 400);
+        });
     }
 }
 
