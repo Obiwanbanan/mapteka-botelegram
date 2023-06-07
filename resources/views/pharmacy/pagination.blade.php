@@ -9,6 +9,9 @@
                 Имя
             </td>
             <td>
+                Город
+            </td>
+            <td>
                 Адрес
             </td>
             <td>
@@ -21,10 +24,12 @@
             <tr>
                 <td> {{ $key + 1 }} </td>
                 <td class="name"> {{ $pharmacy->name }} </td>
+                <td class="city"> {{ $pharmacy->city_id }} </td>
                 <td class="address"> {{ $pharmacy->address }} </td>
+
                 <td>
                     <a href="{{ $pharmacy->map_url }}" class="custom-btn map">Карта</a>
-                    <button class="custom-btn edit" id="{{ $pharmacy->id }}">Редактирвать</button>
+                    <a href="{{ route('pharmacy-update', ['id' => $pharmacy['id']])  }}" class="custom-btn edit" id="{{ $pharmacy->id }}">Редактирвать</a>
                     <button class="custom-btn remove" id="{{ $pharmacy->id }}">Удалить
                         <input id="action" type="hidden" name="action" value="remove">
                         <input id="page" type="hidden" name="page" value="organizations">

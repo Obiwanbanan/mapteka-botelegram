@@ -1,6 +1,5 @@
 @extends('layouts.layout')
 @extends('major-menu')
-
 @section('major-content')
     <div class="major__organization-edit-modal ">
         <div class="major__content-organization-edit-modal">
@@ -56,54 +55,14 @@
     </h2>
     <div class="major__content-pharmacies-additional">
         <div class="major__content-pharmacies-search">
-            <input class="input" id='search' type="text" placeholder="Поиск" data-organization-id="{{ $organization->id }}">
+            <input class="input" id='search' type="text" placeholder="Поиск"
+                   data-organization-id="{{ $organization->id }}">
         </div>
         <a href="{{ route('pharmacy-add') }}?ograhization-id={{ $organization->id }}"
            class="major__content-btn add custom-btn ">
             Добавить аптеку
         </a>
     </div>
-    <div class="major__content-pharmacies">
-        <table>
-            <thead>
-            <tr>
-                <td>
-                    №
-                </td>
-                <td>
-                    Имя
-                </td>
-                <td>
-                    Город
-                </td>
-                <td>
-                    Адрес
-                </td>
-                <td>
-                    Действия
-                </td>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($pharmacies as $key => $pharmacy)
-                <tr>
-                    <td> {{ $key + 1 }} </td>
-                    <td class="name"> {{ $pharmacy->name }} </td>
-                    <td class="city"> {{ $pharmacy->city_id }} </td>
-                    <td class="address"> {{ $pharmacy->address }} </td>
-
-                    <td>
-                        <a href="{{ $pharmacy->map_url }}" class="custom-btn map">Карта</a>
-                        <a href="{{ route('pharmacy-update', ['id' => $pharmacy['id']])  }}" class="custom-btn edit" id="{{ $pharmacy->id }}">Редактирвать</a>
-                        <button class="custom-btn remove" id="{{ $pharmacy->id }}">Удалить
-                            <input id="action" type="hidden" name="action" value="remove">
-                            <input id="page" type="hidden" name="page" value="organizations">
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
 
 
     <div class="pharmacy-cards-wrapper">

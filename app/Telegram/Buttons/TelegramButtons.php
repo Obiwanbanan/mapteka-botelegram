@@ -49,16 +49,14 @@ class TelegramButtons
             $pharmacies = Pharmacies::join('organizations', 'pharmacies.organization_id', '=', 'organizations.id')
                 ->join('bots', 'organizations.bot_id', '=', 'bots.id')
                 ->where('bots.token', $bot_token)
-                ->select('pharmacies.address', 'pharmacies.latitude', 'pharmacies.longitude')
+                ->select('pharmacies.address', 'pharmacies.map_url')
                 ->get();
 
-            $zoom = 16;
             $answer = '';
             if (!empty($pharmacies)) {
                 foreach ($pharmacies as $key => $pharmacy) {
-                    $yandexMapUrl = "https://yandex.ru/maps/?ll={$pharmacy->longitude},{$pharmacy->latitude}&z={$zoom}&mode=search&text={$pharmacy->latitude},{$pharmacy->longitude}";
                     $listNumber = $key + 1;
-                    $answer .= $listNumber . '. ' . $pharmacy->address . "<b><a href='$yandexMapUrl'> На карте 🌍 </a></b>" . "\n";;
+                    $answer .= $listNumber . '. ' . $pharmacy->address . "<b><a href='$pharmacy->map_url'> На карте 🌍 </a></b>" . "\n";;
                 }
             } else {
                 $answer = 'Нет данных';
