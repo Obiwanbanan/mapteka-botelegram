@@ -2,11 +2,9 @@
 
 namespace App\Handler;
 
-use App\Models\Bot;
-use App\Models\Organization;
+
 use App\Models\Pharmacies;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
 class PharmaciesHandler
 {
@@ -69,27 +67,44 @@ class PharmaciesHandler
     }
 
 
-//    private function update(
-//        string $action,
-//        object $request
-//    ): void
-//    {
-//        if ($action === 'update') {
-//            $id = $request->input('pharmacyId');
-//            Pharmacies::where('id', $id)
-//                ->update(
-//                    [
-//                        'name' => $request->input('name'),
-//                        'address' => $request->input('address'),
-//                        'latitude' => $request->input('coordinate_X'),
-//                        'longitude' => $request->input('coordinate_Y'),
-//                    ]
-//                );
-//        }
-//    }
+    public function update(
+        Request $request
+    ): array
+    {
+        $validated = $this->validated($request);
+
+        if (!$validated['status']) {
+            return $validated;
+        }
+        try {
+            Pharmacies::where('id', $request->input('id'))
+                ->update(
+                    [
+                        'name' => $request->input('name'),
+                        'address' => $request->input('address'),
+                        'city_id' => $request->input('selected-city'),
+                        'map_url' => $request->input('map'),
+                        'organization_id' => $request->input('selected-organization'),
+                    ]
+                );
+
+            return [
+                'status' => true,
+                'message' => 'Аптека успешно Отредактирвана',
+                'url' => route('organization') . '/' . $request->input('selected-organization') . '/update',
+
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'Что-то пошло не так!'
+            ];
+        }
+
+    }
 
     public function remove(
-        object $request
+        Request $request
     ): array
     {
         try {
@@ -98,7 +113,6 @@ class PharmaciesHandler
             return [
                 'status' => true,
                 'message' => 'Аптека успешно Удалена',
-
             ];
         } catch (\Exception $e) {
             return [

@@ -5,6 +5,7 @@ class Pharmacy {
 
     init() {
         this.add()
+        this.edit()
         this.remove()
     }
 
@@ -69,6 +70,35 @@ class Pharmacy {
                     position: 'topRight',
                 });
             })
+        })
+    }
+
+    edit() {
+        const editButton = document.querySelector('.major__pharmacy-edit button');
+
+        editButton && editButton.addEventListener('click', async () => {
+
+            const formData = new FormData(document.querySelector('.major__pharmacy-edit form'));
+
+            const response = await fetch(`/pharmacies/${editButton.id}/update`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': window.csrf
+                },
+                body: formData,
+            });
+            const resp = await response.json();
+
+            if (!resp.status) {
+                iziToast.error({
+                    message: resp.message,
+                    position: 'topRight',
+                });
+
+                return;
+            }
+
+            window.location.href = resp.url;
         })
     }
 }

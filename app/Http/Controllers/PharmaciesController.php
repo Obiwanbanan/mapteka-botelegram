@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Handler\PharmaciesHandler;
 use App\Models\City;
 use App\Models\Organization;
+use App\Models\Pharmacies;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -57,6 +58,22 @@ class PharmaciesController extends Controller
         return view('pharmacy/add', [
             'organizations' => Organization::all(),
             'cities'=> City::select('id', 'name')->get(),
+        ]);
+    }
+
+    public function update(
+        Request $request,
+        PharmaciesHandler $pharmaciesHandler,
+    ): View|JsonResponse
+    {
+        if ($request->isMethod('post')) {
+            return response()->json($pharmaciesHandler->update($request));
+        }
+
+        return view('pharmacy/edit', [
+            'organizations' => Organization::all(),
+            'cities'=> City::select('id', 'name')->get(),
+            'pharmacy'=> Pharmacies::where('id', $request->route('id'))->get()->first(),
         ]);
     }
 
