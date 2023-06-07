@@ -56,11 +56,7 @@
     </h2>
     <div class="major__content-pharmacies-additional">
         <div class="major__content-pharmacies-search">
-            <input class="input" id='search' type="text" placeholder="Search">
-            <input class="input" id="action" type="hidden" name="action" value="search">
-            <button class="custom-btn">
-                Поиск
-            </button>
+            <input class="input" id='search' type="text" placeholder="Поиск" data-organization-id="{{ $organization->id }}">
         </div>
         <a href="{{ route('pharmacy-add') }}?ograhization-id={{ $organization->id }}"
            class="major__content-btn add custom-btn ">
@@ -109,5 +105,8 @@
             </tbody>
         </table>
 
+
+    <div class="pharmacy-cards-wrapper">
+        @include('pharmacy.pagination')
     </div>
 @endsection

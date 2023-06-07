@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::match(['GET', 'POST'],'/{id}/update', [PharmaciesController::class, 'update'])->name('pharmacy-update');
         Route::delete('/remove', [PharmaciesController::class, 'remove'])->name('pharmacy-remove');
         Route::get('/search', [PharmaciesController::class, 'search'])->name('pharmacy-search');
+        Route::post('/pagination-with-param', [PharmaciesController::class, 'paginationWithParam'])->name('pharmacy-pagination-with-param');
     });
 
     Route::post('/organization/pharmacies', [PharmaciesController::class, 'pharmacy'])->name('getPharmacies');
