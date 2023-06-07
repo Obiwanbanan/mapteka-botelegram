@@ -17,14 +17,7 @@ class OrganizationsController extends Controller
     public function index(
         Pagination $pagination,
     ): View {
-        $dataPagination = $pagination->paginationWithParam(Organization::class);
-
-        return view('organization/index', [
-            'organizations' => $dataPagination['result'],
-            'totalPage' => $dataPagination['totalPage'],
-            'page' => $dataPagination['page'],
-            'total' => $dataPagination['total'],
-        ]);
+        return view('organization/index', $pagination->paginationWithParam(Organization::class));
     }
 
     public function remove(
@@ -39,17 +32,21 @@ class OrganizationsController extends Controller
         $id,
         Request $request,
         OrganizationHandler $organizationHandler,
-    ): View|JsonResponse
-    {
+        Pagination $pagination,
+    ): View|JsonResponse {
         if ($request->isMethod('post')) {
            return response()->json($organizationHandler->update($request));
         }
 
-        return view('organization/edit', [
+        return view('organization/edit', array_merge([
             'organization' => Organization::find($id),
-            'pharmacies' => Pharmacies::where('organization_id', $id)->get(),
-            'chatBots' => Bot::all()
-        ]);
+            'chatBots' => Bot::all(),
+        ],
+        $pagination->paginationWithParam(
+            null,
+            Pharmacies::getPharmaciesByOrganizationQuery($id)
+        )
+        ));
     }
 
     public function add(
@@ -70,21 +67,11 @@ class OrganizationsController extends Controller
         Request    $request,
         Pagination $pagination,
     ): JsonResponse {
-        $dataPagination = $pagination->paginationWithParam(
-            Organization::class,
+        $result = view('organization/pagination', $pagination->paginationWithParam(
+            null,
+            Organization::getSearchOrganizationQuery($request->get('search')),
             $request->get('page'),
-            6,
-            [
-                'search' => $request->get('search')
-            ]
-        );
-
-        $result = view('organization/pagination', [
-            'organizations' => $dataPagination['result'],
-            'totalPage' => $dataPagination['totalPage'],
-            'page' => $dataPagination['page'],
-            'total' => $dataPagination['total'],
-        ]);
+        ));
 
         return response()->json([
             'result' => $result->render(),

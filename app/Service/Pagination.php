@@ -2,17 +2,21 @@
 
 namespace App\Service;
 
+use App\Models\Organization;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+
 class Pagination
 {
     public function paginationWithParam(
-        string $modelClass,
+        ?string $modelClass = null,
+        Builder $query = null,
         int    $page = 1,
         int    $limit = 6,
-        ?array $param = null
     ): array {
-        $model = new $modelClass;
-        $query = $model->query();
-        $query = $this->handleSearch($query, $param['search'] ?? null);
+        if (!$query) {
+            $query = $this->getQueryClass($modelClass);
+        }
 
         $offset = ($page - 1) * $limit;
         $totalRecords = $query->count();
@@ -20,7 +24,7 @@ class Pagination
         $totalPages = ceil($totalRecords / $limit);
 
         return [
-            'result' => $records,
+            $this->getModalName($query->getModel()) => $records,
             'page' => $page,
             'perPage' => $limit,
             'total' => $totalRecords,
@@ -28,15 +32,18 @@ class Pagination
         ];
     }
 
-    private function handleSearch(
-        mixed $query,
-        ?string $search = null,
-    ): mixed {
-        if ($search) {
-            $query->where('name', 'LIKE', '%' . $search . '%')
-                ->orWhere('INN', 'LIKE', '%' . $search . '%');
-        }
+    private function getQueryClass(
+        string $modelClass,
+    ) {
+        $model = new $modelClass();
 
-        return $query;
+        return $model->query();
+    }
+
+    private function getModalName(
+        Model $model,
+    ): string {
+
+        return sprintf('%ss', mb_strtolower(class_basename($model)));
     }
 }

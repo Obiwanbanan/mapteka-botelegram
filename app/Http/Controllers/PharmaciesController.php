@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Handler\PharmaciesHandler;
 use App\Models\City;
 use App\Models\Organization;
+use App\Models\Pharmacies;
+use App\Service\Pagination;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -66,5 +68,20 @@ class PharmaciesController extends Controller
     ): JsonResponse
     {
         return response()->json($pharmaciesHandler->remove($request));
+    }
+
+    public function paginationWithParam(
+        Request    $request,
+        Pagination $pagination,
+    ): JsonResponse {
+        $result = view('pharmacy/pagination', $pagination->paginationWithParam(
+            null,
+            Pharmacies::getSearchPharmaciesQuery($request->get('search')),
+            $request->get('page'),
+        ));
+
+        return response()->json([
+            'result' => $result->render(),
+        ]);
     }
 }
